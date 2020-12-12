@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Personal Account</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/css/fileinput-rtl.min.css"
+          rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/css/fileinput.min.css"
+          rel="stylesheet">
+
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap-table/1.12.2/bootstrap-table.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap-table/1.12.2/extensions/reorder-rows/bootstrap-table-reorder-rows.css"
+          rel="stylesheet">
+
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<style>
+    .del-pf {
+        content: url('https://img.icons8.com/ios/50/000000/cancel.png');
+        margin-left: 10px;
+        width: 37px;
+        height: 37px;
+        margin-top: 2%
+    }
+
+    .del-pf:hover {
+        content: url('https://img.icons8.com/ios-filled/50/000000/cancel.png');
+    }
+
+    .del {
+        content: url('https://img.icons8.com/ios/50/000000/cancel.png');
+        width: 26px;
+        height: 26px;
+    }
+
+    .del:hover {
+        content: url('https://img.icons8.com/ios-filled/50/000000/cancel.png');
+    }
+
+    .look {
+        content: url('https://img.icons8.com/ios/50/000000/view-file.png');
+        width: 26px;
+        height: 26px;
+    }
+
+    .look:hover {
+        content: url('https://img.icons8.com/ios-filled/50/000000/view-file.png');
+    }
+
+    .accept {
+        content: url('https://img.icons8.com/ios/50/000000/checked.png');
+        width: 26px;
+        height: 26px;
+    }
+
+    .accept:hover {
+        content: url('https://img.icons8.com/ios-filled/50/000000/checked.png');
+    }
+
+    .edit {
+        content: url('https://img.icons8.com/ios/50/000000/pencil-tip.png');
+        width: 26px;
+        height: 26px;
+    }
+
+    .edit:hover {
+        content: url('https://img.icons8.com/ios-filled/50/000000/pencil-tip.png');
+    }
+
+    .msg {
+        content: url('https://img.icons8.com/metro/26/000000/secured-letter.png');
+        width: 26px;
+        height: 26px;
+    }
+
+    .msg:hover {
+        content: url('https://img.icons8.com/metro/26/000000/open-envelope.png');
+    }
+</style>
+<body class="container">
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-8">
+                <br>
+                <a href="/loginhome">
+                    <img alt="Recruitment" src="https://ekrecruit.com.au/wp-content/uploads/2019/02/EK-Logo.png"/>
+                </a>
+            </div>
+
+            <div class="col-sm-2 ">
+                <img class="dropdown-toggle dropdown head_icon" id="dropdownMenuButton"
+                     src="/static/img/icon.jpg"
+                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">
+                        <img src="https://img.icons8.com/cotton/64/000000/name--v2.png" style="width: 30px;">&nbspAccount</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/logout">
+                        <img src="https://img.icons8.com/cotton/64/000000/shutdown--v2.png" style="width: 30px;">&nbsp
+                        Log out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row div-top">
+    <div class="col-md-2 row-top"
+         style="border-color:var(--bgcolor) var(--color) var(--bgcolor) var(--bgcolor); border-style: solid;border-width:3px ;">
+        <ul class="nav nav-tabs flex-column" id="myTab" role="tablist" aria-orientation="vertical">
+            <li class="nav-item">
+                <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                   aria-controls="profile"
+                   aria-selected="false">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="applyJob-tab" data-toggle="tab" href="#applyJob" role="tab"
+                   aria-controls="applyJob"
+                   aria-selected="false">Applied job</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="markJob-tab" data-toggle="tab" href="#markJob" role="tab"
+                   aria-controls="markJob"
+                   aria-selected="false">Favorite job</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="jobRequests-tab" data-toggle="tab" href="#jobRequests" role="tab"
+                   aria-controls="jobRequests"
+                   aria-selected="false">Job requests</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="setting-tab" data-toggle="tab" href="#setting" role="tab"
+                   aria-controls="setting"
+                   aria-selected="false">Reset password</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-10">
+        <div class="tab-content row-top">
+            <div class="tab-pane active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <form role="form" id='formPro' enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row row-top">
+
+                                <div class="col-md-4 row-top">
+                                    {% if curr_user.icon %}
+                                        <img style="border: double var(--color) 5px;width: 180px;height: 180px;"
+                                             id="header" src="{{ curr_user.icon }}">
+                                    {% else %}
+                                        <img style="border: double var(--color) 5px;width: 180px;height: 180px;"
+                                             id="header" src="/static/img/icon.jpg">
+                                    {% endif %}
+                                    </br></br>
+                                    <label>
+                                        Profile Photo
+                                    </label>
+                                    <div>
+                                        <input id="unloadHeader" name="icon" type="file" accept="image/*">
+                                    </div>
+                                    <div id="kartik-file-errors"></div>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <div class="form-group">
+                                        <label for="userName">
+                                            Real Name
+                                        </label>
+                                        <input class="form-control" id="real_name" name="real_name"
+                                               value="{{ curr_user.real_name }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            Birth
+                                        </label>
+                                        <input id="birth_day" name="birth_day" class="form-control" type="date"
+                                               value="{{ curr_user.birth_day }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            Address
+                                        </label>
+                                        (If the matching address is incorrect, please add post code or other details.)
+                                        <div class="row">
+                                            <input class="form-control" id="location" name="location"
+                                                   value="{{ curr_user.location }}"
+                                                   style="width: 80%; margin-left: 15px">
+                                            <a type="submit" class="btn btn-primary " style="margin-left: 15px"
+                                               id="verify_loc">
+                                                <font style="color: white">Verify</font>
+                                            </a>
+                                        </div>
+                                        <div id="hint"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            Education
+                                        </label>
+                                        <div class="row" style="margin-left: 0px;" id="eduDiv">
+                                            <input class="form-control" style="width:50%;" placeholder="School"
+                                                   id="school" name="school">
+                                            <input class="form-control" style="margin-left:10px;width:40%;"
+                                                   placeholder="Major" id="major" name="major">
+                                            <img src="https://img.icons8.com/ios/50/000000/add.png"
+                                                 style="margin-left: 10px;width: 6%;height: 6%;"
+                                                 name="addEdu" id="addEdu"
+                                                 onMouseOver="this.src='https://img.icons8.com/ios-filled/50/000000/add.png'"
+                                                 onMouseOut="this.src='https://img.icons8.com/ios/50/000000/add.png'"/>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="margin-top: 2%;">
+                                        <label>
+                                            Personal Evaluation
+                                        </label>
+                                        <textarea class="form-control" id="desc" name="desc" maxlength="250"
+                                                  style="height: 80px"
+                                                  placeholder="Personal description">{{ curr_user.desc }}</textarea>
+                                    </div>
+                                    <a type="submit" class="btn btn-primary" id="subProfile" style="color: white">
+                                        Submit
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane" id="applyJob" role="tabpanel" aria-labelledby="applyJob-tab">
+                <iframe src="/appliedjobtable" style="height: 700px"></iframe>
+
+            </div>
+            <div class="tab-pane" id="markJob" role="tabpanel" aria-labelledby="markJob-tab">
+                <iframe src="/favjobstable" style="height: 700px"></iframe>
+            </div>
+            <div class="tab-pane" id="jobRequests" role="tabpanel" aria-labelledby="jobRequests-tab">
+                <div>
+                    <iframe src="/requeststable" style="height: 800px"></iframe>
+                </div>
+            </div>
+            <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table id='msgtable'>
+                            <thead>
+                            <tr>
+                                <th>Company</th>
+                                <th>Message</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>John</td>
+                                <td><img class="msg"/></td>
+                            </tr>
+                            <tr>
+                                <td>Herry</td>
+                                <td><img class="msg"/></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="setting" role="tabpanel" aria-labelledby="setting-tab">
+                <div>
+                    <iframe src="/changepwd" style="height:350px"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{#<br/><br/><br/><br/>#}
+<div class="row main_color" style=" margin-top: 3%; padding: 10px;">
+    <iframe src="/footer"></iframe>
+</div>
+<br/>
+<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.12.2/bootstrap-table.js"></script>
+<script src="https://cdn.bootcss.com/TableDnD/1.0.3/jquery.tablednd.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.12.2/extensions/reorder-rows/bootstrap-table-reorder-rows.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/js/fileinput.min.js"></script>
+
+<script src="/static/js/geticon.js"></script>
+<script src="/static/js/account.js"></script>
+<script type="text/javascript">
+    var eduAll = [0, 1, 2, 3, 4, 5, 6];
+    var eduShow = [];
+    var eduDel = [];
+
+    function onprofile(degree) {
+        if (degree.degree.length < 1) {
+            return;
+        }
+        $("#school").val(degree.degree[0][0]);
+        $("#major").val(degree.degree[0][1]);
+        if (degree.degree.length > 1) {
+            for (i = 1; i < degree.degree.length; i++) {
+                var addEdu = eduAll[0];
+                eduShow.push(addEdu);
+                $('#eduDiv').append(
+                    "<input class='form-control' style='width:50%;margin-top:2%;' placeholder='School' id='school" + addEdu + "' name='school" + addEdu + "' value=" + degree.degree[i][0] + ">");
+                $('#eduDiv').append(
+                    "<input class='form-control' style='margin-left:10px;width:40%;margin-top:2%;'placeholder='Major' id='major" +
+                    addEdu + "' name='major" + addEdu + "'value=" + degree.degree[i][1] + ">");
+                $('#eduDiv').append("<img class='del-pf' id='eduDel" + addEdu + "'/>");
+                eduAll.shift();
+            }
+            for (i = 1; i < degree.degree.length; i++) {
+                addDel(i - 1, 1);
+            }
+        }
+    }
+
+    function addDel(i, measure) {
+        $('#eduDel' + i).click(function (e) {
+            $('#school' + i).remove();
+            $('#major' + i).remove();
+            $('#eduDel' + i).remove();
+            eduShow.splice($.inArray(i, eduShow), 1);
+            if (measure == 1) {
+                eduDel.push(i);
+            } else {
+                eduAll.push(i);
+            }
+        });
+    }
+
+    function newDegree(edu) {
+        eduShow.push(edu);
+        $('#eduDiv').append(
+            "<input class='form-control' style='width:50%;margin-top:2%;' placeholder='School' id='school" + edu + "' name='school" + edu + "'/>");
+        $('#eduDiv').append(
+            "<input class='form-control' style='margin-left:10px;width:40%;margin-top:2%;'placeholder='Major' id='major" +
+            edu + "'name='major" + edu + "'/>");
+        $('#eduDiv').append("<img class='del-pf' id='eduDel" + edu + "'/>");
+    }
+
+    $(document).ready(function () {
+        var degree = {{ degree|tojson }};
+        onprofile(degree);
+        $("#applyjobtable").bootstrapTable({
+            striped: true,
+            search: true,
+            useRowAttrFunc: true,
+        });
+        $("#markjobtable").bootstrapTable({
+            striped: true,
+            search: true,
+            useRowAttrFunc: true,
+        });
+        $("#jobrequesttable").bootstrapTable({
+            striped: true,
+            search: true,
+            toolbar: '#jobrequesttoolbar',
+            useRowAttrFunc: true,
+        });
+        $("#msgtable").bootstrapTable({
+            striped: true,
+            search: true,
+            useRowAttrFunc: true,
+        });
+    });
+
+    $('#addEdu').click(function (e) {
+        if (eduShow.length == 7) {
+            return;
+        }
+        if (eduDel.length == 0) {
+            var addEdu = eduAll[0];
+            newDegree(addEdu);
+            addDel(addEdu, 1);
+            eduAll.shift();
+        } else {
+            var delEdu = eduDel[0];
+            newDegree(delEdu);
+            addDel(delEdu, 0);
+            eduDel.shift();
+        }
+    });
+
+
+    function delrequest(job_id) {
+        job_id = job_id.split("del")[0];
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            url: "/deljobrequest",
+            data: {"pos_id": job_id},
+            success: function (result) {
+                if (result.state == "success") {
+                    {#window.alert("Delete Successfully");#}
+                    $("#" + job_id).remove();
+                } else {
+                    window.alert("Fail to delete, please try again");
+                }
+            },
+            error: function (result) {
+                window.alert(result);
+            }
+        });
+    };
+
+    function editrequest(job_id) {
+        job_id = job_id.split("edit")[0];
+        $("#" + job_id + "div").append(
+            "<div class=\"modal fade\" id=\"" + job_id + "requestModal\" tabindex=\"-1\" role=\"dialog\"\n" +
+            "  aria-labelledby=\"" + job_id + "requestModalLable\" aria-hidden=\"true\">\n" +
+            "<div class=\"modal-dialog\" role=\"document\">\n" +
+            "<div class=\"modal-content\" style=\"width: 140%; margin-left: -25%;height: 750px\">\n" +
+            "<div class=\"modal-header\">\n" +
+            "<h5 class=\"modal-title\" id=\"" + job_id + "requestModalLabel\">Edit Job Request</h5>\n" +
+            "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n" +
+            "<span aria-hidden=\"true\">&times;</span>\n" +
+            "</button>\n" +
+            "</div>\n" +
+            "<div class=\"modal-body\">\n" +
+            "<iframe src=\"/editrequest/" + job_id + "\" style=\"height: 600px;\"></iframe>\n" +
+            "</div>\n" +
+            "<div class=\"modal-footer\">\n" +
+            "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\" id=\"" + job_id + "closerequest\">Close</button>\n" +
+            "<button type=\"button\" class=\"btn btn-primary\" id=\"" + job_id + "subrequest\">Save</button>\n" +
+            "</div>\n" +
+            "</div>\n" +
+            "</div>\n" +
+            "</div>"
+        );
+    };
+
+
+</script>
+</body>
+</html>

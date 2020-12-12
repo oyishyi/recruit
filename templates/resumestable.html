@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>poststable</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <link href="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.js"></script>
+
+    <link href="https://cdn.bootcss.com/bootstrap-table/1.12.2/bootstrap-table.css" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdn.bootcss.com/bootstrap-table/1.12.2/extensions/reorder-rows/bootstrap-table-reorder-rows.css">
+
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.bootcss.com/bootstrap-table/1.12.2/extensions/filter-control/bootstrap-table-filter-control.css">
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.12.2/extensions/filter-control/bootstrap-table-filter-control.js"></script>
+
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<table id="table">
+    <thead>
+
+    </thead>
+    <tbody>
+    {% for resume in resumeinfos %}
+        <tr>
+            <td></td>
+            <td>{{ resume }}</td>
+            <td id="{{ resume }}"><a href="/resumeinfo/{{ resume }}"
+                                     target="_blank">{{ resumeinfos[resume].real_name }}</a></td>
+            <td>{{ resumeinfos[resume].pos_name }}</td>
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+<div id="resumestoolbar" class="btn-group row" style="margin-right: 0px;margin-left: 0px;">
+    <a href="/sorted_resume/{{ jobtype }}" title="The intelligent sorting depends on experience and qualification in the resume."
+       type="button" class="btn btn-info btn-sm" style="margin-left: 5px;">
+        Intelligent sorting
+    </a>
+    <button id="resumesave" type="button" class="btn btn-info btn-sm " style="margin-left: 5px;">
+        Save the current order
+    </button>
+    <button id="invite" type="button" class="btn btn-info btn-sm" style="margin-left: 5px;">
+        Invite
+    </button>
+    <span style="margin-left: 5px;"> Top </span>
+    <input id="resumenum" placeholder="eg.5" style="width: 100px;height: 32px"
+           oninput="value=value.replace(/[^\d]/g,'')" onkeyup="validate()"/>
+    <span style="margin-left: 5px;"> Total:{{ totalnum }} </span>
+    <span id="hint" style="margin-left: 5px;"></span>
+
+
+</div>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.12.2/bootstrap-table.js"></script>
+<script src="https://cdn.bootcss.com/TableDnD/1.0.3/jquery.tablednd.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.12.2/extensions/reorder-rows/bootstrap-table-reorder-rows.js"></script>
+<link rel="stylesheet" type="text/css"
+      href="https://cdn.bootcss.com/bootstrap-table/1.12.2/extensions/filter-control/bootstrap-table-filter-control.css">
+<script src="https://cdn.bootcss.com/bootstrap-table/1.12.2/extensions/filter-control/bootstrap-table-filter-control.js"></script>
+
+<script>
+    var jobtype = {{ jobtype|tojson }}
+        jobtype = jobtype.replace('#','%23');
+        $(function () {
+            $('#resumestoolbar').hide()
+            $('#table').bootstrapTable({
+                search: true,
+                reorderableRows: true,
+                striped: true,
+                useRowAttrFunc: true,
+                uniqueId: 'Id',
+                toolbar: "#resumestoolbar",
+                columns:
+                    [{
+                        field: 'No',
+                        title: 'No',
+                        formatter: function (value, row, index) {
+                            return index + 1;
+                        }
+                    }, {
+                        field: 'Id',
+                        title: 'Id',
+                        visible: false,
+                    }, {
+                        field: 'name',
+                        title: 'Name',
+                    }, {
+                        field: 'jobposition',
+                        title: 'Job Position',
+                    }],
+                onReorderRowsDrop: function (table, row) {
+                    //拖拽某条数据后,保持序号递增
+                    var xh = $("#table tr td:nth-of-type(1)");
+                    for (var i = 0; i < xh.length; i++) {
+                        $(xh[i]).text(i + 1);
+                    }
+                }
+            })
+            if (jobtype != 'All') {
+                $('#resumestoolbar').show();
+            }
+
+        });
+
+    $("#resumesave").click(function () {
+        var td = [];
+        var xh = $("#table tr td:nth-of-type(2)");
+        for (var i = 0; i < xh.length; i++) {
+            td[i] = $(xh[i]).attr('id')
+        }
+        {#alert(td);#}
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/saveresumes/" + jobtype,
+            data: {'id': td},
+            traditional: true,
+            success: function (result) {
+                alert("Save successfully");
+            }
+        })
+    })
+    var totalnum = {{ totalnum|tojson }};
+
+    function validate() {
+        var num = $("#resumenum").val();
+        if (num > totalnum || num < 0) {
+            $("#hint").html("invalidate number");
+        } else {
+            $("#hint").html("");
+        }
+
+    };
+
+    $("#invite").click(function () {
+        var td = [];
+        var xh = $("#table tr td:nth-of-type(2)");
+        for (var i = 0; i < xh.length; i++) {
+            td[i] = $(xh[i]).attr('id')
+        }
+        {#alert(td);#}
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/saveresumes/" + jobtype,
+            data: {'id': td},
+            traditional: true,
+            success: function (result) {
+                var num = $("#resumenum").val();
+                if (num == "" || num == 0) {
+                    $("#hint").html("Can not be empty or 0");
+                    return;
+                }
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "/invite/" + jobtype,
+                    data: {"num": num},
+                    success: function (result) {
+                        alert("Invite successfully");
+                        window.location.reload();
+                    }
+                })
+            }
+        })
+    });
+
+</script>
+
+</body>
+</html>

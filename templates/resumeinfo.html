@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Resume Info</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        body {
+            margin: 30px;
+        }
+
+        dt:after {
+            content: ": ";
+        }
+
+        dt {
+            font-weight: bold
+        }
+
+        dd {
+            margin-left: 2em;
+        }
+    </style>
+</head>
+<body class="container">
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-8">
+                <br>
+                <a href="/loginhome">
+                    <img alt="Recruitment" src="https://ekrecruit.com.au/wp-content/uploads/2019/02/EK-Logo.png"/>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="container-fluid div-top">
+    <div class="row">
+        <div class="col-md-12 row-top">
+            <div class="row">
+                <div class="col-md-3 row-top">
+                     {% if info.icon %}
+                    <img class="header" src="{{ info.icon }}" style="width: 160px;height: 160px;"/>
+                    {% else %}
+                    <img class="header" src="/static/img/icon.jpg" style="width: 160px;height: 160px;"/>
+                    {% endif %}
+                    <dl>
+                        <dt>
+                            Name
+                        </dt>
+                        <dd>
+                            {{ info.real_name }}
+                        </dd>
+                        <dt>
+                            Position applied
+                        </dt>
+                        <dd>
+                            {{ info.pos_name }}
+                        </dd>
+                        <dt>
+                            Phone number
+                        </dt>
+                        <dd>
+                            {{ info.phone_num }}
+                        </dd>
+                        <dt>
+                            Address
+                        </dt>
+                        <dd>
+                            {{ info.location }}
+                        </dd>
+                        <dt>
+                            Expected salary
+                        </dt>
+                        <dd style="word-break: break-all;">
+                            ${{ info.expected_salary }}/month
+                        </dd>
+                        <dt>
+                            Technical skills
+                        </dt>
+                        <dd style="word-break: break-all;">
+                            {{ info.skill }}
+                        </dd>
+                    </dl>
+                </div>
+                <div class="col-md-9 row-top">
+                    {% if( info.experience  == '1' ) %}
+                        <h5 align="center">Work experience</h5>
+                        <dl style="margin-left: 30px">
+                            <dt>
+                                Type
+                            </dt>
+                            <dd>
+                                {{ info.exp_type }}
+                            </dd>
+                            <dt>
+                                Experience period
+                            </dt>
+                            <dd>
+                                From {{ info.start_date }} to {{ info.end_date }}
+                            </dd>
+                            <dt>
+                                Experience description
+                            </dt>
+                            <dd style="word-break: break-all;">
+                                {{ info.exp_desc }}
+                            </dd>
+                        </dl>
+                    {% endif %}
+
+                    {% if( info.qualification  == '1' ) %}
+                        <h5 align="center" style="border-top: solid 1px #b4c2b2;"><br>Qualification</h5>
+                        <dl style="margin-left: 30px">
+                            <dt>
+                                Type
+                            </dt>
+                            <dd>
+                                {{ info.qual_type }}
+                            </dd>
+                            <dt>
+                                Date of award
+                            </dt>
+                            <dd>
+                                {{ info.qual_date }}
+                            </dd>
+                            <dt>
+                                Qualification description
+                            </dt>
+                            <dd style="word-break: break-all;">
+                                {{ info.qual_desc }}
+                            </dd>
+                            <dd>
+                                <a href="{{ info.attachment }}" target="_blank">Attachment</a>
+                            </dd>
+
+                        </dl>
+                    {% endif %}
+                    <h5 align="center" style="border-top: solid 1px #b4c2b2;"><br>Postscript</h5>
+                    <dl style="margin-left: 30px">
+                        <dd style="word-break: break-all;">
+                            {{ info.ps }}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br/><br/>
+</body>
+</html>

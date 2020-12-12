@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Posting</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="/static/js/account.js"></script>
+</head>
+<style>
+    html{
+    overflow-x: hidden;
+}
+</style>
+<body>
+<div>
+    <div class="row">
+        <div class="col-md-12">
+            <form role="form" id="formPost">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        <h4>Position Name</h4>
+                    </label><br/>
+                    <input type="text" name="pos_name" id="pos_name" placeholder="Input the job name." maxlength="30"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        <h4>Job Description</h4>
+                    </label><br/>
+                    <textarea rows="10" cols="70" placeholder="No more than 500 characters."
+                              id="desc" name="pos_desc" maxlength="500"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        <h4>Employment Type</h4>
+                    </label><br/>
+                    <select name="employment_type">
+                        <option selected>- Employment type -</option>
+                        <option>Full-time job</option>
+                        <option>Part-time job</option>
+                        <option>Internship</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+
+                    <label for="exampleInputEmail1">
+                        <h4>Renumeration</h4>
+                    </label><br/>
+                    $<input type="text" name="salary" oninput="value=value.replace(/[^\d]/g,'')"
+                            placeholder="Just allow to fill in numbers.">
+                    <select name="salary_type">
+                        <option selected>- Type -</option>
+                        <option>per hour</option>
+                        <option>per day</option>
+                        <option>per week</option>
+                        <option>per month</option>
+                        <option>per year</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        <h4>Location</h4>
+                    </label><br/>
+                    (If the matching address is incorrect, please add post code or other details.)<br/>
+                    <input type="text" name="location" id="location" placeholder="Please input the workplace."
+                           style="width: 260px" maxlength="50"/>
+                    <a type="submit" class="btn btn-primary " style="margin-left: 15px"
+                       id="verify_loc">
+                        <font style="color: white">Verify</font>
+                    </a>
+                    <div id="hint"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        <h4>Responsibility</h4>
+                    </label><br/>
+                    <textarea rows="10" cols="70" placeholder="No more than 500 characters."
+                              id="responsibility" name="responsibility" maxlength="500"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        <h4>Experience</h4>
+                    </label><br/>
+                    <p>
+                        Whether work experience is required.
+                    </p>
+                    <div id="needradio" class="btn-group">
+                        <input type="radio" id="need2" name="experience" value="1"/>Yes
+                        <input type="radio" id="need2" name="experience" checked value="0"/>No
+                    </div>
+                    <br/>
+
+                    <div id="log">
+                        The duration of experience required<br/>
+                        <select name="exp_dura">
+                            <option selected>- Type -</option>
+                            <option>Less than one year</option>
+                            <option>One year</option>
+                            <option>Two years</option>
+                            <option>Three years</option>
+                            <option>More than three years</option>
+                        </select>
+                        <br/><br/>
+
+                        The Experience Type<br/>
+                        <select name="exp_type">
+                            <option selected>- Experience type -</option>
+                            <option>Working experience</option>
+                            <option>Internship</option>
+                        </select>
+                        <br/><br/>
+
+                        Please briefly describe the required work experience.<br/>
+                        <textarea rows="10" cols="70" placeholder="No more than 500 characters."
+                                  name="exp_des" maxlength="500"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        <h4>Qualification</h4>
+                    </label><br/>
+                    <p>
+                        Whether the qualification is required.
+                    </p>
+                    <div id="needradio2" class="btn-group">
+                        <input type="radio" id="need2" name="qualification" value="1"/>Yes
+                        <input type="radio" id="need2" name="qualification" checked value="0"/>No
+                    </div>
+                    <br/>
+
+                    <div id="log2">
+                        The required qualification<br/>
+                        <select name="req_qual">
+                            <option selected>- Type -</option>
+                            <option>Certification</option>
+                            <option>Award</option>
+                        </select>
+                        <br/><br/>
+
+                        Please briefly describe the required qualification.<br/>
+                        <textarea rows="10" cols="70" placeholder="No more than 500 characters."
+                                  id="qual_des" name="qual_des" maxlength="500"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        <h4>Recruiting number</h4>
+                    </label><br/>
+                    <input type="text" name="recruiting_nb" id="recruiting_nb"
+                           oninput="value=value.replace(/[^\d]/g,'')" placeholder="Number" maxlength="50"/>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        <h4>Closing Date</h4>
+                    </label><br/>
+                    <input id="closing_date" type="date" name="closing_date"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/static/js/account.js"></script>
+<script type="text/JavaScript">
+var loc = 0;
+    $('#verify_loc').click(function () {
+    var location = $('#location').val();
+    $.ajax({
+        type: "post",
+        dataType: "json",
+        url: "/verify_location",
+        data: {'location': location},
+        success: function (result) {
+            loc = result.result;
+            if (loc == null) {
+                alert('The address validation failed, please add post code or other details.');
+            }
+            if (loc.length == 1) {
+                $('#location').val(result.result[0]);
+            } else {
+                $('#hint').html('');
+                $('#hint').append('Select your location:');
+                var i = 0;
+                for (i; i < result.result.length; i++) {
+                    $('#hint').append('<li class="list-item">' +
+                        '<a name="loc" href="javascript:void(0);">' + result.result[i] + '</a></li>');
+                }
+                $('a[name="loc"]').click(function () {
+                    $('#location').val($(this).text());
+                })
+            }
+        }
+    });
+});
+
+function sub_loc() {
+    var location = $('#location').val();
+    if (loc == 0) {
+        alert("Please verify your address.");
+        return 1;
+    } else if (loc == null || $.inArray(location, loc) == -1) {
+        alert("Please enter a valid address.");
+        return 1;
+    }
+    return 0;
+}
+
+
+$('#subpost', parent.document).click(function () {
+    if (sub_loc()) {
+        $("html,body").animate({scrollTop: $("#location").offset().top});
+        return false;
+    } else {
+        var pos_name = $("#pos_name").val();
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/post",
+            data: $('#formPost').serialize(),
+            success: function (result) {
+                if (result.state == "success") {
+                    window.alert("Submit Successfully");
+                    document.getElementById("formPost").reset();
+                    $('#closepost', parent.document).click();
+                    window.parent.location.reload();
+
+                } else {
+                    window.alert("Fail to submit, please try again");
+                }
+            }
+        });
+    }
+});
+
+</script>
+</body>
+</html>

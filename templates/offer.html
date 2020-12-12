@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Offer Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<form>
+    <div class="container-fluid">
+        <div class="row">
+            <p style="font-size: large">
+                Dear {{ jobseeker_name }},
+            </p>
+            {% if( content == 'templete' ) %}
+                <p style="font-size: large">
+                    {{ company_name }} company is pleased to offer you the position of
+                    <input type="text" id="postion" name="pos_name" value="">.
+                    Your skills and experience will be an ideal fit for our
+                    <input type="text" id="department" name="department"
+                           value=""> department.
+                </p>
+                <p style="font-size: large">
+                    As we discussed, your starting date will be
+                    <input type="date" id="date" name="working_date" value=""/>.
+                    The starting salary is
+                    <input type="text" name="salary" oninput="value=value.replace(/[^\d]/g,'')" value="">
+                    <select name="salary_type">
+                        <option selected>- Type -</option>
+                        <option>per hour</option>
+                        <option>per day</option>
+                        <option>per week</option>
+                        <option>per month</option>
+                        <option>per year</option>
+                    </select> and is paid on a weekly basis. Direct deposit is available.
+                </p>
+                <p style="font-size: large">
+                    Full family medical coverage will be provided through our company's employee benefit plan and will
+                    be
+                    effective on
+                    <input type="date" id="date" name="benefit_date" value=""/>. Dental and optical insurance are also
+                    available. {{ company_name }} offers a
+                    flexible paid time-off plan which includes
+                    vacation, personal, and sick leave. Time off accrues at the rate of one day per month for your first
+                    year, then
+                    increases based on your tenure with the company. Eligibility for the company retirement plan begins
+                    90
+                    days after
+                    your start date.
+                </p>
+                <p style="font-size: large">
+                    If you choose to accept this job offer, please login your recruitment account and click the "Accept"
+                    button.
+                </p>
+                <p style="font-size: large">
+                    When your acknowledgment is received, we will send you employee benefit enrollment forms and an
+                    employee
+                    handbook
+                    which details our benefit plans and retirement plan. We look forward to welcoming you to
+                    the {{ company_name }} team.
+                </p>
+                <p style="font-size: large">
+                    Please let me know if you have any questions or I can provide any additional information.
+                </p>
+                <p style="font-size: large">
+                <br>
+                Sincerely, <br><input type="text" id="name" name="HR_name" value=""/>
+                <br>Director, Human Resources
+            </p>
+                </div>
+            {% else %}
+                <div>
+                    <textarea style="width: 750px;height: 400px; font-size: large" name="offer"/></textarea>
+                </div>
+                <p style="font-size: large">
+                <br>
+                Sincerely, <br><input type="text" id="name" name="HR_name" value=""/>
+                <br>Director, Human Resources
+            </p>
+                </div>
+            {% endif %}
+    </div>
+</form>
+<script>
+    var resume_id = {{ resume_id|tojson }}
+        var content = {{ content|tojson }}
+        $("#send" + resume_id, parent.document).click(function () {
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "/offer/" + resume_id+"/"+content,
+                data: $("form").serialize(),
+                success: function (result) {
+                    if (result.state == "success") {
+                        $('#close' + resume_id, parent.document).click();
+                        $("#" + resume_id, parent.document).text("offered");
+                    } else {
+                        window.alert("Fail, please try again");
+                    }
+                }
+            });
+        })
+</script>
+</body>
+</html>

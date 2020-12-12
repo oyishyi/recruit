@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div class="col-md-10">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                    <form role="form" id="formSetting">
+                        <div class="form-group">
+                            <label>
+                                Current Password
+                            </label>
+                            <input type="password" class="form-control" id="currPwd"/>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                New Password
+                            </label>
+                            <input type="password" class="form-control" id="newPwd" onkeyup="validate()"/>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Confirm
+                            </label>
+                            <input type="password" class="form-control" id="confirmPwd" onkeyup="validate()"/>
+                        </div>
+                        <div><span id="hint"></span></div>
+
+                        <button type="submit" class="btn btn-primary" id="subSetting">
+                            Submit
+                        </button>
+                    </form>
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+    function validate() {
+        var pw1 = document.getElementById("newPwd").value;
+        var pw2 = document.getElementById("confirmPwd").value;
+        if (pw1 == pw2) {
+            document.getElementById("hint").innerHTML = "<font style='color:var(--color)' size='5'>Same password</font>";
+            document.getElementById("subSetting").disabled = false;
+        } else {
+            document.getElementById("hint").innerHTML = "<font color='red'size='5'>Different password</font>";
+            document.getElementById("subSetting").disabled = true;
+        }
+    }
+
+    $("#subSetting").click(function () {
+        var currpwd = $("#currPwd").val();
+        var newpwd = $("#newPwd").val();
+        var comfirmpwd = $("#confirmPwd").val();
+        if (currpwd == "" || newpwd == "" || comfirmpwd == "") {
+            window.alert("Can not be empty");
+        } else {
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                url: "/changepwd",
+                data: {"currpwd": currpwd, "newpwd": newpwd},
+                success: function (result) {
+                    if (result.state == "success") {
+                        window.alert("Change Successfully");
+                        document.getElementById("formSetting").reset();
+                        $("#hint").empty();
+                    } else if (result.state == "wrong") {
+                        window.alert("Wrong password");
+                        $("#hint").empty();
+                    } else {
+                        window.alert("Fail to change, please try again");
+                    }
+                },
+                error: function (result) {
+                    window.alert(result);
+                }
+            })
+        }
+        return false;
+    })
+</script>
+</body>
+</html>

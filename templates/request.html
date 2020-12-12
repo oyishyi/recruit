@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Request</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</head>
+<style>
+    html {
+        overflow-x: hidden;
+    }
+</style>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <form role="form" id="formrequest">
+                <div class="form-group">
+                    <label>
+                        <h4>
+                            Phone Number
+                        </h4>
+                    </label>
+                    <br/>
+                    <input name='phone_num' id='phone_num' maxlength="11" placeholder="only 11 numbers"
+                           oninput="value=value.replace(/[^\d]/g,'')"/>
+                    <span id="hint1"></span>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        <h4>Expected Position</h4>
+                    </label>
+                    <br/>
+                    <input type="text" name="jobname" id="jobname" placeholder="Input the job name." maxlength="30"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        <h4>Personal Ability Description</h4>
+                    </label><br/>
+                    <textarea rows="10" cols="70" placeholder="No more than 500 characters." name='desc'
+                              maxlength="500"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        <h4>Experience</h4>
+                    </label><br/>
+                    <h6>
+                        Do you have any work experience?
+                    </h6>
+                    <div class="btn-group" id="needradio">
+                        <input type='radio' name='exp_need' id='need1' value="1"/>Yes
+                        <input type='radio' name='exp_need' id='need1' checked value="0"/>No
+                    </div>
+
+                    <div id="log">
+                        <br>
+                        <h6>
+                            How long is your work experience period?
+                        </h6>
+                        <select name="exp_duration">
+                            <option selected>- Type -</option>
+                            <option>Less than one year</option>
+                            <option>One year</option>
+                            <option>Two years</option>
+                            <option>Three years</option>
+                            <option>More than three years</option>
+                        </select>
+                        <br/><br/>
+
+                        <h6>
+                            What is your experience type(Are you a student)?
+                        </h6>
+                        <select name="exp_type">
+                            <option selected>- Experience type -</option>
+                            <option>Working experience</option>
+                            <option>Internship</option>
+                        </select>
+                        <br/><br/>
+
+                        <h6>
+                            Please briefly describe your work experience.
+                        </h6>
+                        <textarea rows="10" cols="70" placeholder="No more than 500 characters."
+                                  name="exp_desc" maxlength="500"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        <h4>Qualification</h4>
+                    </label>
+                    <h6>
+                        Do you have any certification or award with this position?
+                    </h6>
+                    <div class="btn-group" id="needradio2">
+                        <input type='radio' name='qualification' id='need2' value="1"/>Yes
+                        <input type='radio' name='qualification' id='need2' checked value="0"/>No
+                    </div>
+
+                    <div id="log2">
+                        <br/>
+                        <h6>
+                            What time your obtained this certification or award?
+                        </h6>
+                        <label>
+                            Date of Certification
+                        </label>
+                        <input id="qual_date" type="date" name="qual_date"/>
+                        <br/><br/>
+
+                        <h6>
+                            What is your qualification type(Certification or Award)?
+                        </h6>
+                        <select id="qual_type" name="qual_type">
+                            <option selected>- Qualification type -</option>
+                            <option>Certification</option>
+                            <option>Award</option>
+                        </select>
+                        <br/><br/>
+
+                        <h6>
+                            Please briefly describe how you obtained this certification or award.
+                        </h6>
+                        <textarea rows="10" cols="70" placeholder="No more than 500 characters." id="qual_desc" name="qual_desc" maxlength="500"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/static/js/account.js"></script>
+<script type="text/JavaScript">
+
+    $('#subrequest', parent.document).click(function () {
+        var pos_name = $("#jobname").val();
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/request",
+            data: $('#formrequest').serialize(),
+            success: function (result) {
+                if (result.state == "success") {
+                    window.alert("Submit Successfully");
+                    document.getElementById("formrequest").reset();
+                    $('#closerequest', parent.document).click();
+                    window.parent.location.reload();
+
+                } else {
+                    window.alert("Fail to submit, please try again");
+                }
+            }
+        });
+    });
+
+</script>
+</body>
+</html>

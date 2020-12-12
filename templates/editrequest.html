@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Request</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <form role="form" id="formrequest">
+                <div class="form-group">
+                    <label>
+                        <h4>
+                            Phone Number
+                        </h4>
+                    </label>
+                    <br/>
+                    <input name='phone_num' id='phone_num' maxlength="11" placeholder="only 11 numbers"
+                           oninput="value=value.replace(/[^\d]/g,'')" value="{{ requestinfo.phone_num }}"/>
+                    <span id="hint1"></span>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        <h4>Expected Position</h4>
+                    </label>
+                    <br/>
+                    <input type="text" name="jobname" id="jobname"
+                           value="{{ requestinfo.jobname }}" placeholder="Input the job name." maxlength="30"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        <h4>Personal Ability Description</h4>
+                    </label><br/>
+                    <textarea rows="10" cols="70" placeholder="No more than 500 characters."
+                              name='desc' maxlength="500">{{ requestinfo.desc }}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        <h4>Experience</h4>
+                    </label><br/>
+                    <p>
+                        Do you have any work experience?
+                    </p>
+                    <div class="btn-group" id="needradio">
+                        <input type='radio' name='exp_need' id='exp_need' value="1"/>Yes
+                        <input type='radio' name='exp_need' id='exp_need' checked value="0"/>No
+                    </div>
+
+                    <div id="log">
+                        How long do you have work experience?<br/>
+                        <select name="exp_duration" id="exp_duration">
+                            <option selected>- Type -</option>
+                            <option>Less than one year</option>
+                            <option>One year</option>
+                            <option>Two years</option>
+                            <option>Three years</option>
+                            <option>More than three years</option>
+                        </select>
+                        <br/><br/>
+
+                        What is your experience type<br/>
+                        <select name="exp_type" id="exp_type">
+                            <option selected>- Experience type -</option>
+                            <option>Working experience</option>
+                            <option>Internship</option>
+                        </select>
+                        <br/><br/>
+
+                        Please briefly describe your work experience.<br/>
+                        <textarea rows="10" cols="70" placeholder="No more than 500 characters."
+                                  name="exp_desc" maxlength="500">{{ requestinfo.exp_desc }}</textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        <h4>Qualification</h4>
+                    </label><br/>
+                    <p>
+                        Do you have any qualification(certification or award)?
+                    </p>
+                    <div class="btn-group" id="needradio2">
+                        <input type='radio' name='qual_need' id='qual_need' value="1"/>Yes
+                        <input type='radio' name='qual_need' id='qual_need' checked value="0"/>No
+                    </div>
+
+                    <div id="log2">
+                        When to obtain the certificate or award?<br/>
+                        <input id="qual_date" type="date" name="qual_date" value="{{ requestinfo.qual_date }}"/>
+                        <br/><br/>
+
+                        What is your qualification Type<br/>
+                        <select name="qual_type" id="qual_type">
+                            <option selected>- Qualification type -</option>
+                            <option>Certification</option>
+                            <option>Award</option>
+                        </select>
+                        <br/><br/>
+
+                        Please briefly describe how you obtained this certification or award.<br/>
+                        <textarea rows="10" cols="70" placeholder="No more than 500 characters."
+                                  id="qual_desc" name='qual_desc' maxlength="500">{{ requestinfo.qual_desc }}</textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/JavaScript">
+    var job_id = {{ requestinfo.id|tojson }}
+        $(document).ready(function () {
+            var exp_need = {{ requestinfo.exp_need|tojson }};
+            if (exp_need == 0) {
+                $("#log").hide();
+                $("input[name=exp_need][value='0']").attr("checked", true);
+            } else {
+                $("input[name=exp_need][value='1']").attr("checked", true);
+            }
+            $("#needradio :radio").change(function () {
+                var value = $(this).val();
+                if (value == 0) {
+                    $("#log").hide();
+                } else {
+                    $("#log").show();
+                }
+            });
+
+            var qual_need = {{ requestinfo.qual_need|tojson }};
+            if (qual_need == 0) {
+                $("#log2").hide();
+                $("input[name=qual_need][value='0']").attr("checked", true);
+            } else {
+                $("input[name=qual_need][value='1']").attr("checked", true);
+            }
+            $("#needradio2 :radio").change(function () {
+                var value = $(this).val();
+                if (value == 0) {
+                    $("#log2").hide();
+                } else {
+                    $("#log2").show();
+                }
+            });
+            var qual_type = {{ requestinfo.qual_type|tojson }};
+            $("#qual_type").find("option:contains('" + qual_type + "')").attr("selected", true);
+            var exp_duration = {{ requestinfo.exp_duration|tojson }};
+            $("#exp_duration").find("option:contains('" + exp_duration + "')").attr("selected", true);
+            var exp_type = {{ requestinfo.exp_type|tojson }};
+            $("#exp_type").find("option:contains('" + exp_type + "')").attr("selected", true);
+        });
+
+
+    $('#' + job_id + 'subrequest', parent.document).click(function () {
+        var jobname = $("#jobname").val();
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/editrequest/" + job_id,
+            data: $('#formrequest').serialize(),
+            success: function (result) {
+                if (result.state == "success") {
+                    $('#' + job_id + "closerequest", parent.document).click();
+                    $('#' + job_id + "name", parent.document).text(jobname);
+                } else {
+                    window.alert("Fail to save, please try again");
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

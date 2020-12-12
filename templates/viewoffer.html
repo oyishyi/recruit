@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>viewoffer</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="container">
+<div class="row" style="height: 50px"></div>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8" style="border: #005CEB 2px solid">
+        <div class="container margin_10">
+            <p>
+                Dear {{ offer.jobseeker_name }},
+            </p>
+
+            {% if( content == 'templete' ) %}
+                <p>
+                    {{ offer.company_name }} is pleased to offer you the position of
+                    {{ offer.pos_name }}.
+                    Your skills and
+                    experience will be an ideal fit for our {{ offer.department }}
+                    department.
+                </p>
+                <p>
+                    As we discussed, your starting date will be {{ offer.working_date }}. The
+                    starting salary
+                    is $ {{ offer.salary }}{{ offer.salary_type }}
+                    and is paid on a weekly basis. Direct deposit is available.
+                </p>
+                <p>
+                    Full family medical coverage will be provided through our company's employee benefit plan and will
+                    be
+                    effective on
+                    {{ offer.benefit_date }}. Dental and optical insurance are also
+                    available. {{ offer.company_name }} offers a
+                    flexible paid time-off plan which includes
+                    vacation, personal, and sick leave. Time off accrues at the rate of one day per month for your first
+                    year, then
+                    increases based on your tenure with the company. Eligibility for the company retirement plan begins
+                    90
+                    days after
+                    your start date.
+                </p>
+                <p>
+                    If you choose to accept this job offer, please login your recruitment account and click the "Accept"
+                    button.
+                </p>
+                <p>
+                    When your acknowledgment is received, we will send you employee benefit enrollment forms and an
+                    employee
+                    handbook
+                    which details our benefit plans and retirement plan. We look forward to welcoming you to
+                    the {{ offer.company_name }} team.
+                </p>
+                <p>
+                    Please let me know if you have any questions or I can provide any additional information.
+                </p>
+                <p>
+                    Sincerely, <br><br>
+                    {{ offer.HR_name }}<br>Director,
+                    Human Resources
+                </p>
+                <p>
+                <h6 class="card-subtitle mb-2 text-muted">{{ offer.create_time }}</h6>
+                </p>
+                </div>
+            {% else %}
+                <div>
+                    {{ offer.offer }}
+                </div>
+                <p>
+                    Sincerely, <br><br>
+                    {{ offer.HR_name }}<br>Director,
+                    Human Resources
+                </p>
+                <p>
+                <h6 class="card-subtitle mb-2 text-muted">{{ offer.create_time }}</h6>
+                </p>
+            {% endif %}
+
+    </div>
+</div>
+<div class="row" style="height: 50px"></div>
+</body>
+</html>

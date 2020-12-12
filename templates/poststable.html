@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>poststable</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <link href="https://cdn.bootcss.com/bootstrap-table/1.12.2/bootstrap-table.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap-table/1.12.2/extensions/reorder-rows/bootstrap-table-reorder-rows.css"
+          rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<style>
+    .del {
+        content: url('https://img.icons8.com/ios/50/000000/cancel.png');
+        width: 26px;
+        height: 26px;
+        margin-left: 5%;
+    }
+
+    .del:hover {
+        content: url('https://img.icons8.com/ios-filled/50/000000/cancel.png');
+    }
+
+    .edit {
+        content: url('https://img.icons8.com/ios/50/000000/pencil-tip.png');
+        width: 26px;
+        height: 26px;
+        margin-left: 5%;
+    }
+
+    .edit:hover {
+        content: url('https://img.icons8.com/ios-filled/50/000000/pencil-tip.png');
+    }
+
+</style>
+<body>
+<table id="table" >
+    <thead>
+    <tr>
+        <th data-field="job" data-sortable="true">Job Position</th>
+        <th data-field="delete_edit" data-sortable="true">Delete/Edit</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for job in jobpost %}
+        <tr id="{{ job }}">
+            <td id="{{ job }}name">{{ jobpost[job] }}</td>
+            <td><img name="{{ job }}del" class="del" onclick="delpost('{{ job }}del')"/>
+                <img name="{{ job }}edit" class="edit" onclick="editpost('{{ job }}edit')"
+                     data-toggle="modal" data-target="#postModal{{ job }}"/>
+                <div id="{{ job }}div"></div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<div id="jobposttoolbar" class="btn-group row" style="margin-right: 0px;margin-left: 0px;">
+    <button id="postadd" type="button" class="btn btn-info btn-sm "
+            data-toggle="modal" data-target="#postModal">
+        New
+    </button>
+    <div class="modal fade" id="postModal" tabindex="-1" role="dialog"
+         aria-labelledby="postModalLable" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width: 140%; margin-left: -25%;height: 140%">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="postModalLabel">Job Post</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <iframe src="/post" style="height: 550px;"></iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closepost">Close
+                    </button>
+                    <button type="button" class="btn btn-primary" id="subpost">Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.12.2/bootstrap-table.js"></script>
+<script src="https://cdn.bootcss.com/TableDnD/1.0.3/jquery.tablednd.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.12.2/extensions/reorder-rows/bootstrap-table-reorder-rows.js"></script>
+
+<script>
+    $(function () {
+        $('#table').bootstrapTable({
+            striped: true,
+            search: true,
+            toolbar: '#jobposttoolbar',
+            useRowAttrFunc: true,
+            pagination:true,
+        })
+    })
+
+    function delpost(job_id) {
+        job_id = job_id.split("del")[0];
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            url: "/deljobpost",
+            data: {"pos_id": job_id},
+            success: function (result) {
+                if (result.state == "success") {
+                    {#$("#" + job_id).remove();#}
+                    window.location.reload()
+                } else {
+                    window.alert("Fail to delete, please try again");
+                }
+            },
+            error: function (result) {
+                window.alert(result);
+            }
+        });
+
+    };
+
+    function editpost(job_id) {
+        job_id = job_id.split("edit")[0];
+        $("#" + job_id + "div").html(
+            "<div class=\"modal fade\" id=\"postModal" + job_id + "\"  role=\"dialog\"\n" +
+            "  aria-labelledby=\"postModalLable" + job_id + "\" aria-hidden=\"true\">\n" +
+            "<div class=\"modal-dialog\" role=\"document\">\n" +
+            "<div class=\"modal-content\" style=\"width: 140%; margin-left: -25%;height: 140%\">\n" +
+            "<div class=\"modal-header\">\n" +
+            "<h5 class=\"modal-title\" id=\"postModalLabel" + job_id + "\">Edit Job Post</h5>\n" +
+            "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n" +
+            "<span aria-hidden=\"true\">&times;</span>\n" +
+            "</button>\n" +
+            "</div>\n" +
+            "<div class=\"modal-body\">\n" +
+            "<iframe src=\"/editpost/" + job_id + "\" style=\"height: 550px;\"></iframe>\n" +
+            "</div>\n" +
+            "<div class=\"modal-footer\">\n" +
+            "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\" id=\"" + job_id + "closepost\">Close</button>\n" +
+            "<button type=\"button\" class=\"btn btn-primary\" id=\"" + job_id + "subpost\">Send message</button>\n" +
+            "</div>\n" +
+            "</div>\n" +
+            "</div>\n" +
+            "</div>"
+        );
+    };
+</script>
+
+</body>
+</html>

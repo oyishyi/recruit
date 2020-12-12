@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Company Account</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/css/fileinput-rtl.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/css/fileinput.min.css" rel="stylesheet">
+
+
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap-table/1.12.2/bootstrap-table.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap-table/1.12.2/extensions/reorder-rows/bootstrap-table-reorder-rows.css"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<style>
+    .del {
+        content: url('https://img.icons8.com/ios/50/000000/cancel.png');
+        width: 26px;
+        height: 26px;
+        margin-left: 5%;
+    }
+
+    .del:hover {
+        content: url('https://img.icons8.com/ios-filled/50/000000/cancel.png');
+    }
+
+    .edit {
+        content: url('https://img.icons8.com/ios/50/000000/pencil-tip.png');
+        width: 26px;
+        height: 26px;
+        margin-left: 5%;
+    }
+
+    .edit:hover {
+        content: url('https://img.icons8.com/ios-filled/50/000000/pencil-tip.png');
+    }
+
+    .msg {
+        content: url('https://img.icons8.com/metro/26/000000/secured-letter.png');
+        margin-left: 5%;
+        width: 26px;
+        height: 26px;
+    }
+
+    .msg:hover {
+        content: url('https://img.icons8.com/metro/26/000000/open-envelope.png');
+    }
+
+    .invite {
+        content: url('https://img.icons8.com/ios/50/000000/send.png');
+        width: 26px;
+        height: 26px;
+        margin-left: 5%;
+    }
+
+    .invite:hover {
+        content: url('https://img.icons8.com/ios-filled/50/000000/send.png');
+    }
+</style>
+<body class="container">
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-8">
+                <br>
+                <a href="/loginhome">
+                    <img alt="Recruitment" src="https://ekrecruit.com.au/wp-content/uploads/2019/02/EK-Logo.png"/>
+                </a>
+            </div>
+
+            <div class="col-sm-2 ">
+                <img class="dropdown-toggle dropdown head_icon" id="dropdownMenuButton"
+                     src="/static/img/icon.jpg"
+                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">
+                        <img src="https://img.icons8.com/cotton/64/000000/name--v2.png" style="width: 30px;">&nbspAccount</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/logout">
+                        <img src="https://img.icons8.com/cotton/64/000000/shutdown--v2.png" style="width: 30px;">&nbsp
+                        Log out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row div-top">
+    <div class="col-md-2 row-top"
+         style="border-color:var(--bgcolor) var(--color) var(--bgcolor) var(--bgcolor); border-style: solid;border-width:3px ;">
+        <ul class="nav nav-tabs flex-column" id="myTab" role="tablist" aria-orientation="vertical">
+            <li class="nav-item">
+                <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                   aria-controls="profile"
+                   aria-selected="false">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="resumes-tab" data-toggle="tab" href="#resumes" role="tab"
+                   aria-controls="resumes"
+                   aria-selected="false">Resumes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="offers-tab" data-toggle="tab" href="#offers" role="tab" aria-controls="offers"
+                   aria-selected="false">Offers</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" id="markCan-tab" data-toggle="tab" href="#markCan" role="tab"
+                   aria-controls="markCan"
+                   aria-selected="false">Marked Requests</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="jobPosts-tab" data-toggle="tab" href="#jobPosts" role="tab"
+                   aria-controls="jobPosts"
+                   aria-selected="false">Job postings</a>
+            </li>
+{#            <li class="nav-item">#}
+{#                <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab"#}
+{#                   aria-controls="messages"#}
+{#                   aria-selected="false">Messages</a>#}
+{#            </li>#}
+            <li class="nav-item">
+                <a class="nav-link" id="setting-tab" data-toggle="tab" href="#setting" role="tab"
+                   aria-controls="setting"
+                   aria-selected="false">Reset password</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-10">
+        <div class="tab-content row-top">
+            <div class="tab-pane active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <form role="form" id='formPro' enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row row-top">
+                                <div class="col-md-4 row-top">
+                                    {% if curr_user.icon %}
+                                    <img style="border: double var(--color) 5px;width: 180px;height: 180px;" id="header" src="{{ curr_user.icon }}">
+                                    {% else %}
+                                    <img style="border: double var(--color) 5px;width: 180px;height: 180px;" id="header" src="/static/img/icon.jpg">
+                                    {% endif %}
+                                    </br></br>
+                                    <label>
+                                        Head Image
+                                    </label>
+                                    <div>
+                                        <input id="unloadHeader" name="icon" type="file" accept="image/*">
+                                    </div>
+                                    <div id="kartik-file-errors"></div>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <div class="form-group">
+                                        <label>
+                                            Company Name
+                                        </label>
+                                        <input class="form-control" id="real_name" name="real_name"
+                                               value="{{ curr_user.real_name }}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>
+                                            Address
+                                        </label>
+                                        (If the matching address is incorrect, please add post code or other details.)
+                                        <div class="row">
+                                            <input class="form-control" id="location" name="location"
+                                                   value="{{ curr_user.location }}"
+                                                   style="width: 80%; margin-left: 15px">
+                                            <a type="submit" class="btn btn-primary " style="margin-left: 15px"
+                                               id="verify_loc">
+                                                <font style="color: white">Verify</font>
+                                            </a>
+                                        </div>
+                                        <div id="hint"></div>
+                                    </div>
+                                    <div class="form-group" style="margin-top: 2%;">
+                                        <label>
+                                            Description
+                                        </label>
+                                        <textarea class="form-control" id="desc" name="desc" style="height: 80px"
+                                                  maxlength="250"
+                                                  placeholder="Company description">{{ curr_user.desc }}</textarea>
+                                    </div>
+
+                                    <a type="submit" class="btn btn-primary" id="subProfile">
+                                        <font style="color: white">Submit</font>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane" id="resumes" role="tabpanel" aria-labelledby="resumes-tab">
+                <div class="row margin_10">
+                    <input id="job_type_resume" name="job_type" list="resume_list"/>
+                    <datalist id="resume_list">
+                        <option>All</option>
+                        {% for type in  jobtype %}
+                            <option>{{ type }}</option>
+                        {% endfor %}
+                    </datalist>
+                    <a type="submit" class="btn btn-primary" id="viewresumestable" style="margin-left: 5%">
+                        <font style="color: white">View job position</font>
+                    </a>
+                </div>
+                <div>
+                    <iframe id="resumetable" src="/resumestable/All" style="height: 700px;"></iframe>
+                </div>
+            </div>
+            <div class="tab-pane" id="offers" role="tabpanel" aria-labelledby="offers-tab">
+                <div class="row margin_10">
+                    <input id="job_type_offer" name="job_type" list="offer_list"/>
+                    <datalist id="offer_list">
+                        <option>All</option>
+                        {% for type in  jobtype %}
+                            <option>{{ type }}</option>
+                        {% endfor %}
+                    </datalist>
+                    <a type="submit" class="btn btn-primary" id="viewofferstable" style="margin-left: 5%">
+                        <font style="color: white">View job position</font>
+                    </a>
+                </div>
+                <div>
+                    <iframe id="offerstable" src="/offerstable/All" style="height: 900px"></iframe>
+                </div>
+            </div>
+            <div class="tab-pane" id="markCan" role="tabpanel" aria-labelledby="markCan-tab">
+                <iframe src="/favrequeststable" style="height: 700px"></iframe>
+            </div>
+            <div class="tab-pane" id="jobPosts" role="tabpanel" aria-labelledby="jobPosts-tab">
+                <div>
+                    <iframe src="/poststable" style="height: 800px"></iframe>
+                </div>
+
+            </div>
+            <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table id='msgtable'>
+                            <thead>
+                            <tr>
+                                <th>Canidates' names</th>
+                                <th>Message</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>John</td>
+                                <td><img class="msg"/></td>
+                            </tr>
+                            <tr>
+                                <td>Herry</td>
+                                <td><img class="msg"/></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="setting" role="tabpanel" aria-labelledby="setting-tab">
+                <div>
+                    <iframe src="/changepwd" style="height: 350px;"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row main_color" style="padding: 10px; margin-top:3%;">
+    <iframe src="/footer"></iframe>
+</div>
+<br/>
+
+<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.12.2/bootstrap-table.js"></script>
+<script src="https://cdn.bootcss.com/TableDnD/1.0.3/jquery.tablednd.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.12.2/extensions/reorder-rows/bootstrap-table-reorder-rows.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/js/fileinput.min.js"></script>
+
+<script src="/static/js/geticon.js"></script>
+<script src="/static/js/account.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#cantable").bootstrapTable({
+            // reorderableRows: true,
+            striped: true,
+            search: true,
+            useRowAttrFunc: true,
+        });
+
+        $("#msgtable").bootstrapTable({
+            // reorderableRows: true,
+            striped: true,
+            search: true,
+            useRowAttrFunc: true,
+        });
+    });
+
+
+    $("#viewresumestable").click(function () {
+        var jobtype = $("#job_type_resume").val();
+        if (jobtype == '') {
+            jobtype = 'All'
+        }
+        jobtype = jobtype.replace('#', '%23');
+        $("#resumetable").attr('src', "/resumestable/" + jobtype);
+    });
+
+    $("#viewofferstable").click(function () {
+        var jobtype = $("#job_type_offer").val();
+        if (jobtype == '') {
+            jobtype = 'All'
+        }
+        jobtype = jobtype.replace('#', '%23');
+        $("#offerstable").attr('src', "/offerstable/" + jobtype);
+    });
+
+
+</script>
+
+</body>
+</html>

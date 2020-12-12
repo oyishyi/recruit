@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>favjobstable</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <link href="https://cdn.bootcss.com/bootstrap-table/1.12.2/bootstrap-table.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap-table/1.12.2/extensions/reorder-rows/bootstrap-table-reorder-rows.css"
+          rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<style>
+    .del {
+        content: url('https://img.icons8.com/ios/50/000000/cancel.png');
+        width: 26px;
+        height: 26px;
+        margin-left: 5%;
+    }
+
+    .del:hover {
+        content: url('https://img.icons8.com/ios-filled/50/000000/cancel.png');
+    }
+
+    .edit {
+        content: url('https://img.icons8.com/ios/50/000000/pencil-tip.png');
+        width: 26px;
+        height: 26px;
+        margin-left: 5%;
+    }
+
+    .edit:hover {
+        content: url('https://img.icons8.com/ios-filled/50/000000/pencil-tip.png');
+    }
+
+</style>
+<body>
+<table id="table" >
+    <thead>
+{#    <tr>#}
+{#        <th data-field="job" data-sortable="true">Job Position</th>#}
+{#        <th data-field="delete_edit" data-sortable="true">Delete</th>#}
+{#    </tr>#}
+    </thead>
+    <tbody>
+
+    {% for job in favreuqests %}
+        <tr >
+        <td></td>
+            <td><a href="/requestInfo/{{ job }}" target="_blank">{{ favreuqests[job].pos_name }}</a></td>
+            <td>{{ favreuqests[job].real_name }}</td>
+            <td><img name="{{ job }}del" class="del" onclick="delfav('{{ job }}')"/>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.12.2/bootstrap-table.js"></script>
+<script src="https://cdn.bootcss.com/TableDnD/1.0.3/jquery.tablednd.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.12.2/extensions/reorder-rows/bootstrap-table-reorder-rows.js"></script>
+
+<script>
+    $(function () {
+        $('#table').bootstrapTable({
+            striped: true,
+            search: true,
+            {#toolbar: '#jobposttoolbar',#}
+            useRowAttrFunc: true,
+            pagination:true,
+            columns:
+                [{
+                    field: 'No',
+                    title: 'No',
+                    formatter: function (value, row, index) {
+                        return index + 1;
+                    }
+                }, {
+                    field: 'job',
+                    title: 'Job Request',
+                },
+                    {
+                    field: 'name',
+                    title: 'Name',
+                },
+                    {
+                    field: 'delete',
+                    title: 'Delete',
+                }]
+        })
+    })
+
+    function delfav(job_id) {
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            url: "/delfavrequest",
+            data: {"pos_id": job_id},
+            success: function (result) {
+                if (result.state == "success") {
+                    window.location.reload()
+                } else {
+                    window.alert("Fail to delete, please try again");
+                }
+            },
+            error: function (result) {
+                window.alert(result);
+            }
+        });
+
+    };
+
+</script>
+
+</body>
+</html>

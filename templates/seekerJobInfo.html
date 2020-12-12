@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<title>Seek Job</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="./static/css/style.css">
+	</head>
+	<body class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-8">
+						<br>
+						<a href="/loginhome">
+						<img alt="Recruitment" src="https://ekrecruit.com.au/wp-content/uploads/2019/02/EK-Logo.png"/>
+                            </a>
+					</div>
+					
+				<div class="col-sm-2 ">
+					<img class="dropdown-toggle dropdown header" id="dropdownMenuButton" 
+					src= "http://touxiang.ikkss.com/avatar/201901/2019010916245286.jpg" 
+					style="margin-left:130px;border-radius: 100px;width:80px;height:80px; margin-top: 30%;"
+					 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<a class="dropdown-item" href="/account">
+							<img src="https://img.icons8.com/cotton/64/000000/name--v2.png" style="width: 30px;">&nbspAccount</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="/">
+							<img src="https://img.icons8.com/cotton/64/000000/shutdown--v2.png" style="width: 30px;">&nbsp Log out</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<div class="container-fluid div-top" >
+			<div class="row row-top">
+				<div class="col-md-8" style="border-right: solid 1px #b4c2b2;">
+					<dl>
+						<dt>
+							<h1>Seek job</h1>
+						</dt>
+						<dd>
+							<h5>Name</h5> </br>
+							Age: 30 ys &nbsp gender: male </br>
+							Release date: 2020-10-10
+						</dd>
+						<dd style="border-top: solid 1px #b4c2b2;">
+							<h6>Brief introduction of the Seeker</h6>
+							Brand Architects is a friendly and dynamic award winning Architecture practice based in East Melbourne.
+							We undertake a broad range of projects in the public sector with an emphasis on Education,
+							Community Services and Sport & Recreation.
+						</dd>
+						<dd>
+							<h6>job description</h6>We undertakeWe undertakeWe undertakeWe undertakeWe undertake
+							Donec id elit non mi porta gravida at eget metus.
+						</dd>
+						<dd>
+							<h6>responsibilities</h6>
+							<div class="view">
+								<ul contenteditable="true" class="">
+									<li class="list-item"> Compiling project bids and award submissions</li>
+									<li class="list-item"> Helping to organise office events, travel and Conference bookings</li>
+								</ul>
+							</div>
+						</dd>
+						<dd>
+							<h6>qualifications</h6>
+							<div class="view">
+								<ul contenteditable="true" class="">
+									<li class="list-item"> At least 5 years previous experience in a similar role</li>
+									<li class="list-item"> Exceptional written and communication skills</li>
+								</ul>
+							</div>
+						</dd>
+						<dd>
+							<h6>experience</h6>We undertakeWe undertakeWe undertakeWe undertakeWe undertake
+							Donec id elit non mi porta gravida at eget metus.
+						</dd>
+
+					</dl>
+				</div>
+				<div class="col-md-4">
+					<div class="row">
+						<div class="col-md-6">
+							<img src= "http://touxiang.ikkss.com/avatar/201901/2019010916245286.jpg" 
+							style="width: 160px;height: 160px;">
+						</div>
+						<div class="col-md-6">
+							<h6>
+								Email
+							</h6>
+							<p>
+								<a class="btn" href="#">View details »</a>
+							</p>
+						</div>
+					</div>
+					<div class="row" style="margin-top:10%;border-top: solid 1px #b4c2b2;">
+						<div class="col-md-6" style="margin-top:10%;">
+							<img type="btn" style="margin-left:30%;" id="collect" onclick="change()" data-toggle="tooltip" title="mark" src="https://img.icons8.com/cotton/64/000000/hearts--v3.png" />
+						</div>
+						<div class="col-md-6" style="margin-top:10%;">
+							<img type="btn" style="margin-left:20%;" id="contact" onclick="newMessage()" onclick="contract" data-toggle="tooltip"
+							 title="contact to employer" src="https://img.icons8.com/pastel-glyph/64/000000/filled-chat.png" />
+						</div>
+					</div>
+					<div class="row col-md-12" style="margin-top: 5%;">
+						<button type="btn" class="btn btn-success" data-toggle="modal" data-target="#inviteModal" style="background-color: #800080;margin-left: 20%;margin-top: 5%;">
+							Invitation for an interview
+						</button>
+					</div>
+
+					<div class="modal fade" id="inviteModal" tabindex="-1" role="dialog" 
+					aria-labelledby="inviteModalLabel"		 aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="inviteModalLabel">Invitation</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<form>
+										<div class="form-group">
+											<label for="recipient-name" class="col-form-label">Name&job</label>
+										</div>
+										<div class="form-group">
+											<div class="form-group">
+												<label for="message-text" class="col-form-label">Content:</label>
+												<textarea class="form-control" id="message-text" style="height: 135px;"></textarea>
+											</div>
+										</div>
+									</form>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary">Send</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+
+					<div class="row" style="margin-top:15%;border-top: solid 1px #b4c2b2;">
+						<div class="col-md-8" style="margin-top:5%;">
+							If this is a malicious job seeker, you can complain to us.&nbsp;&nbsp;&nbsp;&nbsp;-->
+						</div>
+						<div class="col-md-4" style="margin-top:8%;">
+							<img type="button" data-toggle="modal" data-target="#complaintModal" 
+							src="https://img.icons8.com/pastel-glyph/64/000000/thumbs-down--v2.png"/>
+						</div>
+
+						<div class="modal fade" id="complaintModal" tabindex="-3" role="dialog" aria-labelledby="complaintModalLabel"
+						 aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="complaintModalLabel">Complaint</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<form>
+											<div class="form-group">
+												<label for="recipient-name" class="col-form-label">Company&job</label>
+											</div>
+											<div class="form-group">
+												<label for="message-text" class="col-form-label">Message:</label>
+												<textarea class="form-control" id="message-text" maxlength="250" style="height: 135px;" placeholder="max 250 words"></textarea>
+											</div>
+										</form>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+										<button type="button" class="btn btn-primary">Send message</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+		<div class="row main_color" style="padding: 10px; margin-top:3%;">
+			<ul style="list-style: none;">
+				<li>
+					<a href="aboutus.html">
+						<font color="white">About us</font><br>
+				</li>
+				<li>
+					<a href="Resume.html">
+						<font color="white">Q&A</font>
+					</a>
+				</li>
+				<li>
+					<a href="www.google.com">
+						<font color="white">Contact us</font>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<br/>
+	</body>
+</html>
+
+<script>
+	function change() {
+		var x = document.getElementById("collect").getAttribute("src");
+		if (x == "https://img.icons8.com/cotton/64/000000/hearts--v3.png") {
+			document.getElementById("collect").src = "https://img.icons8.com/cotton/64/000000/hearts--v2.png";
+			document.getElementById("collect").title = "unmark";
+		} else {
+			document.getElementById("collect").src = "https://img.icons8.com/cotton/64/000000/hearts--v3.png";
+		}
+		//alert(x);
+	}
+
+	function newMessage() {
+		var x = document.getElementById("contact").getAttribute("src");
+		if (x == "https://img.icons8.com/pastel-glyph/64/000000/filled-chat.png") {
+			document.getElementById("contact").src = "https://img.icons8.com/cotton/64/000000/filled-chat--v1.png";
+			document.getElementById("contact").title = "new message";
+		} else {
+			document.getElementById("contact").src = "https://img.icons8.com/pastel-glyph/64/000000/filled-chat.png";
+		}
+	}
+</script>

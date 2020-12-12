@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Job Info</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<style>
+    dd {
+        word-break: break-all;
+    }
+</style>
+<body class="container">
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-8">
+                <br>
+                <a href="/loginhome">
+                    <img alt="Recruitment" src="https://ekrecruit.com.au/wp-content/uploads/2019/02/EK-Logo.png"/>
+                </a>
+            </div>
+            <div class="col-sm-2 ">
+                <img class="dropdown-toggle dropdown head_icon" id="dropdownMenuButton"
+                     src="/static/img/icon.jpg"
+                     style="margin-left:130px;border-radius: 100px;width:80px;height:80px; margin-top: 30%;"
+                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="/account">
+                        <img src="https://img.icons8.com/cotton/64/000000/name--v2.png" style="width: 30px;">&nbspAccount</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/logout">
+                        <img src="https://img.icons8.com/cotton/64/000000/shutdown--v2.png" style="width: 30px;">&nbsp
+                        Log out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid div-top">
+    <div class="row row-top">
+        <div class="col-md-8" style="border-right: solid 1px #b4c2b2;">
+            <dl>
+                <dt>
+                    <h2>{{ info.real_name }}</h2>
+                </dt>
+                <dd>
+                    <h4>Expected Position: {{ info.jobname }} </h4>
+                    <font color="#696969"> <strong>Contact number:&nbsp;&nbsp;{{ info.phone_num }}</strong></font>
+                </dd>
+                <dd style="border-top: solid 1px #b4c2b2;">
+                    <br/>
+                    <h5>Personal Ability Description</h5>
+                    {{ info.desc }}
+                </dd>
+                <br/>
+
+
+                {% if(info.qual_need == "1") %}
+                    <dd style="border-top: solid 1px #b4c2b2;"><br/>
+                        <h5>Qualification</h5>
+                        <div class="row">
+                            <div class="col-md-5"><h6>The qualification type:</h6></div>
+                            <div class="col-md-4">{{ info.qual_type }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5"><h6>Obtain date:</h6></div>
+                            <div class="col-md-4"> {{ info.qual_date }}</div>
+                        </div>
+
+                        <h6>Brief description </h6>
+                        {{ info.qual_desc }}
+                    </dd>
+                {% endif %}
+                <br/>
+                {% if(info.exp_need == "1") %}
+                    <dd style="border-top: solid 1px #b4c2b2;"><br/>
+                        <h5>Experience</h5>
+                        <div class="row">
+                            <div class="col-md-5"><h6>The duration of experience:</h6></div>
+                            <div class="col-md-4"> {{ info.exp_duration }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5"><h6>The experience type:</h6></div>
+                            <div class="col-md-4">{{ info.exp_type }}</div>
+                        </div>
+                        <h6>Brief description</h6>
+                        {{ info.exp_desc }}
+                    </dd>
+                {% endif %}
+
+            </dl>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-6">
+                     {% if info.icon %}
+                    <img class="header" src="{{ info.icon }}" style="width: 160px;height: 160px;"/>
+                    {% else %}
+                    <img class="header" src="/static/img/client-face.png" style="width: 160px;height: 160px;"/>
+                    {% endif %}
+                </div>
+                <div class="col-md-6">
+                    <dt>
+                        Address:
+                    </dt>
+                    <dd>{{ info.location }}</dd>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top:10%;border-top: solid 1px #b4c2b2;">
+                <div class="col-md-6" style="margin-top:10%;">
+                    {% if fav == 0 %}
+                        <img type="btn" style="margin-left:30%;" id="collect" data-toggle="tooltip" title="mark"
+                             src="https://img.icons8.com/cotton/64/000000/hearts--v3.png"/>
+                    {% else %}
+                        <img type="btn" style="margin-left:30%;" id="collect" data-toggle="tooltip" title="mark"
+                             src="https://img.icons8.com/cotton/64/000000/hearts--v2.png"/>
+                    {% endif %}
+                </div>
+                <div class="col-md-6" style="margin-top:10%;">
+                    <img type="btn" style="margin-left:20%;" id="contact" onclick="newMessage()" onclick="contract"
+                         data-toggle="tooltip"
+                         title="contact to employer"
+                         src="https://img.icons8.com/pastel-glyph/64/000000/filled-chat.png"/>
+                </div>
+            </div>
+            <div class="row" style="margin-top:15%;border-top: solid 1px #b4c2b2;">
+                <div class="col-md-9" style="margin-top:5%;">
+                    If this job request is incorrect or fake, please inform us.
+                </div>
+                <div class="col-md-3" style="margin-top:5%;">
+                    <img type="button" id="postBt"
+                         src="https://img.icons8.com/pastel-glyph/64/000000/thumbs-down--v2.png"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="row main_color" style="padding: 10px; margin-top:3%;">
+    <iframe src="/footer"></iframe>
+</div>
+<br/>
+
+<script src="/static/js/geticon.js"></script>
+<script>
+
+    $("#collect").click(function () {
+        var job_id = {{ info.request_id|tojson }};
+        var x = document.getElementById("collect").getAttribute("src");
+        if (x == "https://img.icons8.com/cotton/64/000000/hearts--v3.png") {
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "/favorite/" + job_id + "/1",
+                data: {},
+                success: function (result) {
+                    if (result.state == "success") {
+                        document.getElementById("collect").src = "https://img.icons8.com/cotton/64/000000/hearts--v2.png";
+                        document.getElementById("collect").title = "unmark";
+                    } else {
+                        window.alert("Fail to collect, please try again");
+                    }
+                }
+            });
+
+        } else {
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "/favorite/" + job_id + "/0",
+                data: {},
+                success: function (result) {
+                    if (result.state == "success") {
+                        document.getElementById("collect").src = "https://img.icons8.com/cotton/64/000000/hearts--v3.png";
+                        document.getElementById("collect").title = "mark";
+                    } else {
+                        window.alert("Fail to collect, please try again");
+                    }
+                }
+            });
+        }
+    });
+
+    function newMessage() {
+        var x = document.getElementById("contact").getAttribute("src");
+        if (x == "https://img.icons8.com/pastel-glyph/64/000000/filled-chat.png") {
+            document.getElementById("contact").src = "https://img.icons8.com/cotton/64/000000/filled-chat--v1.png";
+            document.getElementById("contact").title = "new message";
+        } else {
+            document.getElementById("contact").src = "https://img.icons8.com/pastel-glyph/64/000000/filled-chat.png";
+            document.getElementById("contact").title = "contact to company";
+        }
+    }
+
+    $('#postBt').click(function () {
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/send_email",
+            data: 123,
+            success: function (result) {
+            }
+        })
+    })
+</script>
+</body>
+</html>

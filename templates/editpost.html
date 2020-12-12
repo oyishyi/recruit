@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Posting</title>
+
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+{#		<link rel="stylesheet" href="./static/css/style.css">#}
+	</head>
+	<body >
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<form role="form" id="formPost">
+						<div class="form-group">
+							<label for="exampleInputEmail1">
+									<h4>Position Name</h4>
+							</label><br />
+							<input type="text" name="pos_name" id="pos_name" placeholder="Input the job name."
+                                   value="{{ jobinfo.pos_name }}"maxlength="30" />
+						</div>
+
+						<div class="form-group">
+							<label for="exampleInputEmail1">
+								<h4>Job Description</h4>
+							</label><br />
+							<textarea rows="10" cols="70" placeholder="No more than 500 characters."
+                                  id="desc" name="pos_desc" maxlength="500">{{ jobinfo.desc }}</textarea>
+						</div>
+
+						<div class="form-group">
+							<label for="exampleInputEmail1">
+								<h4>Employment Type</h4>
+							</label><br />
+							<select name="employment_type" id="employment_type">
+								<option selected>- Employment type -</option>
+								<option>Full-time job</option>
+								<option>Part-time job</option>
+								<option>Internship</option>
+							</select>
+						</div>
+
+						<div class="form-group">
+
+							<label for="exampleInputEmail1">
+								<h4>Renumeration</h4>
+							</label><br />
+							$<input type="text" name="salary" oninput="value=value.replace(/[^\d]/g,'')"
+                                    value="{{ jobinfo.salary }}"placeholder="Just allow to fill in numbers.">
+							<select name="salary_type" id="salary_type">
+								<option selected>- Type -</option>
+								<option>per hour</option>
+								<option>per day</option>
+								<option>per week</option>
+								<option>per month</option>
+								<option>per year</option>
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label for="exampleInputEmail1">
+								<h4>Location</h4>
+							</label><br />
+							<input type="text" name="location" id="location"
+                                   value="{{ jobinfo.location }}" placeholder="Please input the workplace." maxlength="50" />
+						</div>
+
+						<div class="form-group">
+							<label for="exampleInputEmail1">
+								<h4>Responsibility</h4>
+							</label><br />
+							<textarea rows="10" cols="70" placeholder="No more than 500 characters."
+                                 id="responsibility" name="responsibility" maxlength="500">{{ jobinfo.responsibility }}</textarea>
+						</div>
+
+						<div class="form-group">
+							<label for="exampleInputEmail1">
+								<h4>Experience</h4>
+							</label><br />
+							<p>
+								Whether work experience is required.
+							</p>
+							<div id="needradio" class="btn-group">
+								<input type="radio" id="need2" name="experience" value="1" />Yes
+								<input type="radio" id="need2" name="experience" value="0" />No
+							</div><br />
+
+							<div id="log">
+								The duration of experience required<br />
+								<select name="exp_dura" id="exp_dura">
+									<option selected>- Type -</option>
+									<option>Less than one year</option>
+									<option>One year</option>
+									<option>Two years</option>
+									<option>Three years</option>
+									<option>More than three years</option>
+								</select>
+								<br /><br />
+
+								The Experience Type<br />
+								<select name="exp_type"  id="exp_type">
+									<option selected>- Experience type -</option>
+									<option>Working experience</option>
+									<option>Internship</option>
+								</select>
+								<br /><br />
+
+								Please briefly describe the required work experience.<br />
+								<textarea rows="10" cols="70" placeholder="No more than 500 characters."
+                                          name="exp_des" maxlength="500">{{ jobinfo.exp_des }}</textarea>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="exampleInputEmail1">
+								<h4>Qualification</h4>
+							</label><br />
+							<p>
+								Whether the qualification is required.
+							</p>
+							<div id="needradio2" class="btn-group">
+								<input type="radio" id="need2" name="qualification" value="1" />Yes
+								<input type="radio" id="need2" name="qualification" value="0" />No
+							</div>
+
+							<div id="log2">
+                                <br />
+								The required qualification<br />
+								<select name="req_qual" id="req_qual" style="width: 180px">
+									<option selected>- Type -</option>
+									<option>Certification</option>
+									<option>Award</option>
+								</select>
+								<br /><br />
+
+								Please briefly describe the required qualification.<br />
+								<textarea rows="10" cols="70" placeholder="No more than 500 characters."
+                                          id="qual_des" name="qual_des" maxlength="500">{{ jobinfo.qual_des }}</textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">
+								<h4>Recruiting number</h4>
+							</label><br />
+							<input type="text" name="recruiting_nb" id="recruiting_nb"
+                                   value="{{ jobinfo.recruiting_nb}}" placeholder="Number" maxlength="50" />
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">
+								<h4>Closing Date</h4>
+							</label><br />
+							<input id="closing_date" value="{{ jobinfo.closing_date }}" type="date" name="closing_date"/>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/JavaScript">
+            var job_id = {{ jobinfo.id|tojson }}
+			$(document).ready(function ()
+			{
+			    var experience= {{ jobinfo.experience|tojson }};
+			    if( experience== "0"){
+                    $("#log").hide();
+			        $("input[name=experience][value='0']").attr("checked",true);
+			    }else{
+			        $("input[name=experience][value='1']").attr("checked",true);
+                }
+
+				$("#needradio :radio").change(function ()
+				{
+					var value=$(this).val();
+					if(value == 0)
+					{
+						$("#log").hide();
+					}
+					else
+					{
+						$("#log").show();
+					}
+				});
+
+			    var qual_need= {{ jobinfo.qualification|tojson }};
+			    if(qual_need == "0"){
+			        $("#log2").hide();
+			        $("input[name=qualification][value='0']").attr("checked",true);
+                }else{
+			        $("input[name=qualification][value='1']").attr("checked",true);
+                }
+				$("#needradio2 :radio").change(function ()
+				{
+					var value=$(this).val();
+					if(value == 0)
+					{
+						$("#log2").hide();
+					}
+					else
+					{
+						$("#log2").show();
+					}
+				});
+
+                var req_qual = {{ jobinfo.req_qual|tojson }};
+			     $("#req_qual").find("option:contains('"+req_qual+"')").attr("selected",true);
+			     var employment_type = {{ jobinfo.employment_type|tojson }};
+			     $("#employment_type").find("option:contains('"+employment_type+"')").attr("selected",true);
+                 var salary_type = {{ jobinfo.salary_type|tojson }};
+			     $("#salary_type").find("option:contains('"+salary_type+"')").attr("selected",true);
+			     var exp_dura = {{ jobinfo.exp_dura|tojson }};
+			     $("#exp_dura").find("option:contains('"+exp_dura+"')").attr("selected",true);
+			     var exp_type = {{ jobinfo.exp_type|tojson }};
+			     $("#exp_type").find("option:contains('"+exp_type+"')").attr("selected",true);
+			});
+
+			$('#'+job_id+'subpost', parent.document).click(function (){
+			    var pos_name = $("#pos_name").val();
+                $.ajax({
+					type: "POST",
+					dataType: "json",
+					url: "/editpost/"+job_id,
+                    data:$('#formPost').serialize(),
+					success: function(result) {
+					    if(result.state == "success"){
+                            $('#'+job_id+"closepost", parent.document).click();
+                            $('#'+job_id+"name", parent.document).text(pos_name);
+                        }
+					    else{
+					        window.alert("Fail to save, please try again");
+                        }
+					}
+				});
+            });
+		</script>
+	</body>
+</html>

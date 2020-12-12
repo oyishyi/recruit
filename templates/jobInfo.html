@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Job Info</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="container">
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-8">
+                <br>
+                <a href="/loginhome">
+                    <img alt="Recruitment" src="https://ekrecruit.com.au/wp-content/uploads/2019/02/EK-Logo.png"/>
+                </a>
+            </div>
+            <div class="col-sm-2 ">
+                <img class="dropdown-toggle dropdown head_icon" id="dropdownMenuButton"
+                     src="/static/img/icon.jpg"
+                     style="margin-left:130px;border-radius: 100px;width:80px;height:80px; margin-top: 30%;"
+                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="/account">
+                        <img src="https://img.icons8.com/cotton/64/000000/name--v2.png" style="width: 30px;">&nbspAccount</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/logout">
+                        <img src="https://img.icons8.com/cotton/64/000000/shutdown--v2.png" style="width: 30px;">&nbsp
+                        Log out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid div-top">
+    <div class="row row-top">
+        <div class="col-md-8" style="border-right: solid 1px #b4c2b2;">
+            <dl>
+                <dt>
+                    <h2>{{ info.pos_name }}</h2>
+                </dt>
+                <dd>
+                    Salary: {{ info.salary }} {{ info.salary_type }} &nbsp; &nbsp; Employment type: {{ info.employment_type }} &nbsp; &nbsp;Deadline: {{ info.closing_date }} </br>
+                    Recruiting numbers:{{ info.recruiting_nb }} &nbsp;&nbsp; Submitted numbers:{{ info.submitted_nb }}
+                </dd>
+                <dd style="border-top: solid 1px #b4c2b2;">
+                    <h5>Brief introduction of the company</h5>
+                    {{ info.company_desc }}
+                </dd>
+                <dd>
+                    <h5>Job Description</h5>
+                    {{ info.pos_desc }}
+                </dd>
+                <dd>
+                    <h5>Job Responsibilities</h5>
+                    <div class="view">
+                        <ul>
+                            {% for resp in info.responsibility %}
+                                <li class="list-item"> {{ resp }}</li>
+                            {% endfor %}
+
+                        </ul>
+                    </div>
+                </dd>
+                <dd>
+                    {% if(info.qualification == "1") %}
+                        <h5>Required Qualifications</h5>
+                        <div class="view">
+                            <ul class="">
+                                {% for qualdes in info.qual_des %}
+                                    <li class="list-item"> {{ qualdes }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </dd>
+                <dd>
+                    {% if(info.experience == "1") %}
+                        <h5>Required Experience</h5>
+                        The duration of experience required: {{ info.exp_dura }}<br/>
+                        The Experience Type: {{ info.exp_type }}<br/>
+                        <dt>Brief description</dt>
+                        {{ info.exp_des }}
+                    {% endif %}
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-6">
+                    {% if info.icon %}
+                    <img class="header" src="{{ info.icon }}" style="width: 160px;height: 160px;"/>
+                    {% else %}
+                    <img class="header" src="/static/img/Legal.jpg" style="width: 160px;height: 160px;"/>
+                    {% endif %}
+                </div>
+                <div class="col-md-6">
+                    <dt>
+                        Address:
+                    </dt>
+                    <dd>{{ info.location }}</dd>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top:10%;border-top: solid 1px #b4c2b2;">
+                <div class="col-md-6" style="margin-top:10%;">
+                    {% if fav == 0 %}
+                        <img type="btn" style="margin-left:30%;" id="collect" data-toggle="tooltip" title="mark"
+                             src="https://img.icons8.com/cotton/64/000000/hearts--v3.png"/>
+                    {% else %}
+                        <img type="btn" style="margin-left:30%;" id="collect" data-toggle="tooltip" title="mark"
+                             src="https://img.icons8.com/cotton/64/000000/hearts--v2.png"/>
+                    {% endif %}
+                </div>
+                <div class="col-md-6" style="margin-top:10%;">
+                    <img type="btn" style="margin-left:20%;" id="contact" onclick="newMessage()" onclick="contract"
+                         data-toggle="tooltip"
+                         title="contact to employer"
+                         src="https://img.icons8.com/pastel-glyph/64/000000/filled-chat.png"/>
+
+                </div>
+            </div>
+            <div class="row col-md-12" style="margin-top: 5%;">
+                <button type="btn" class="btn btn-success" data-toggle="modal" data-target="#applyModal"
+                        style="background-color: #800080;margin-left: 30%;margin-top: 5%;">
+                    Apply for this job
+                </button>
+            </div>
+
+            <div class="modal fade" id="applyModal" tabindex="-3" role="dialog" aria-labelledby="applyModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content" style="height: 700px; width: 130%; margin-left: -20%;">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="applyModalLabel">Application</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <iframe src="/resume/{{ info.id }}" style="height: 500px;"></iframe>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeresume">
+                                Close
+                            </button>
+                            <button type="button" class="btn btn-primary" id="subresume">Send message</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row" style="margin-top:15%;border-top: solid 1px #b4c2b2;">
+                <div class="col-md-9" style="margin-top:5%;">
+                    If this job posting is incorrect or fake, please inform us.
+                </div>
+                <div class="col-md-3" style="margin-top:5%;">
+                    <img type="button" id="postBt"
+                         src="https://img.icons8.com/pastel-glyph/64/000000/thumbs-down--v2.png"/>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="row main_color" style="padding: 10px; margin-top:3%;">
+    <iframe src="/footer"></iframe>
+</div>
+<br/>
+</body>
+</html>
+<script src="/static/js/geticon.js"></script>
+<script>
+
+    $("#collect").click(function () {
+        var job_id = {{ info.id|tojson }};
+        var x = document.getElementById("collect").getAttribute("src");
+        if (x == "https://img.icons8.com/cotton/64/000000/hearts--v3.png") {
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "/favorite/" + job_id + "/1",
+                data: {},
+                success: function (result) {
+                    if (result.state == "success") {
+                        document.getElementById("collect").src = "https://img.icons8.com/cotton/64/000000/hearts--v2.png";
+                        document.getElementById("collect").title = "unmark";
+                    } else {
+                        window.alert("Fail to collect, please try again");
+                    }
+                }
+            });
+
+        } else {
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "/favorite/" + job_id + "/0",
+                data: {},
+                success: function (result) {
+                    if (result.state == "success") {
+                        document.getElementById("collect").src = "https://img.icons8.com/cotton/64/000000/hearts--v3.png";
+                        document.getElementById("collect").title = "mark";
+                    } else {
+                        window.alert("Fail to collect, please try again");
+                    }
+                }
+            });
+        }
+    });
+
+    function newMessage() {
+        var x = document.getElementById("contact").getAttribute("src");
+        if (x == "https://img.icons8.com/pastel-glyph/64/000000/filled-chat.png") {
+            document.getElementById("contact").src = "https://img.icons8.com/cotton/64/000000/filled-chat--v1.png";
+            document.getElementById("contact").title = "new message";
+        } else {
+            document.getElementById("contact").src = "https://img.icons8.com/pastel-glyph/64/000000/filled-chat.png";
+            document.getElementById("contact").title = "contact to company";
+        }
+    }
+
+    $('#postBt').click(function () {
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/send_email",
+            data: 123,
+            success: function (result) {
+            }
+        })
+    })
+</script>

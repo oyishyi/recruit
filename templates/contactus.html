@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <style>
+        body {
+            margin: 30px;
+        }
+
+        dt:after {
+            content: ": ";
+        }
+
+        dt {
+            font-weight: bold
+        }
+
+        dd {
+            margin-left: 1em;
+        }
+    </style>
+</head>
+<body class="container">
+<div class="row" style="border-bottom: var(--color) 5px solid">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-8">
+                <br>
+                <a href="/">
+                    <img alt="Recruitment" src="https://ekrecruit.com.au/wp-content/uploads/2019/02/EK-Logo.png">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="margin: 2% 5% 0% 5%;">
+    <h1>Contact Us</h1>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row margin_10">
+                <div class="col-md-7">
+                    <h4>Have an enquiry?</h4>
+                    <span>Send us an email using the form below and we’ll get back to you, <br/>
+                    generally within 1 business day.<br/><br/>
+                    Can’t wait? Search for answers in Q&A.</span>
+                    <br/><br/>
+
+                    <input id="postBt" type="button"
+                       style="border:none; background-color: #005CEB;
+						 color:white;border-radius:5px; width:100px; height:30px;"
+                    href="/send_email" value="Send email"/>
+
+
+                </div>
+                <div class="col-md-4 margin_10">
+                    <dl>
+                        <dt>
+                            Contact us by phone number
+                        </dt>
+                        <dd>
+                            If you're ready to work with one of Australia's
+                            top boutique recruitment agencies,
+                        </dd>
+                        <dd>
+                            please get in touch with us below or call us on <font style="font-weight: 600">1800 667
+                            426</font>.
+                            <br/>
+                            (8:30am - 5:30pm Monday to Friday)
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br/> <br/> <br/>
+
+<script>
+    $('#postBt').click(function () {
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/send_email",
+            data:123,
+            success: function (result) {
+            }
+        })
+    })
+</script>
+
+</body>
+</html>

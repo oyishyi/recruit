@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Job Info</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="container">
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-8">
+                <br>
+                <a href="/loginhome">
+                    <img alt="Recruitment" src="https://ekrecruit.com.au/wp-content/uploads/2019/02/EK-Logo.png"/>
+                </a>
+            </div>
+            <div class="col-sm-2 ">
+                <img class="dropdown-toggle dropdown head_icon" id="dropdownMenuButton"
+                     src="/static/img/icon.jpg"
+                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="/account">
+                        <img src="https://img.icons8.com/cotton/64/000000/name--v2.png" style="width: 30px;">&nbspAccount</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/logout">
+                        <img src="https://img.icons8.com/cotton/64/000000/shutdown--v2.png" style="width: 30px;">&nbsp
+                        Log out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid div-top">
+    <div class="row row-top">
+        <div class="col-md-8" style="border-right: solid 1px #b4c2b2;">
+            <dl>
+                <dt>
+                    <h1>{{ info.pos_name }}</h1>
+                </dt>
+                <dd>
+                    salary: {{ info.salary }}&nbsp {{ info.salary_type }} &nbsp &nbsp employment type
+                    : {{ info.employment_type }} </br>
+                    deadline: {{ info.closing_date }} </br>
+                    recruiting numbers:{{ info.recruiting_nb }} &nbsp&nbsp submitted numbers:{{ info.submitted_nb }}
+                </dd>
+                <dd style="border-top: solid 1px #b4c2b2;">
+                    <h6>Brief introduction of the company</h6>
+
+                    {{ info.company_desc }}
+                </dd>
+                <dd>
+                    <h6>job description</h6>
+
+                    {{ info.pos_desc }}
+                </dd>
+                <dd>
+                    <h6>job responsibilities</h6>
+                    <div class="view">
+                        <ul>
+                            {% for resp in info.responsibility %}
+                                <li class="list-item"> {{ resp }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </dd>
+                <dd>
+                    {% if(info.qualification == "1") %}
+                        <h6>required qualifications</h6>
+                        <div class="view">
+                            <ul>
+                                {% for qualdes in info.qual_des %}
+                                    <li class="list-item"> {{ qualdes }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </dd>
+                <dd>
+                    {% if(info.experience == "1") %}
+                        <h6>required experience</h6>
+                        The duration of experience required:{{ info.exp_dura }}<br/>
+                        The Experience Type:{{ info.exp_type }}<br/>
+                        Brief description <br/>
+                        {{ info.exp_des }}
+                    {% endif %}
+                </dd>
+
+            </dl>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-6">
+                    {% if info.icon %}
+                    <img src="{{ info.icon }}" style="width: 160px;height: 160px;"/>
+                    {% else %}
+                    <img src="/static/img/Legal.jpg" style="width: 160px;height: 160px;"/>
+                    {% endif %}
+                </div>
+                <div class="col-md-6">
+                    <h6>
+                        Address:
+                    </h6>
+                    {{ info.location }}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+<div class="row main_color" style=" margin: 0px; padding: 10px;">
+    <iframe src="/footer"></iframe>
+</div>
+<br>
+</body>
+</html>
+
+<script>
+
+
+    function change() {
+        var x = document.getElementById("collect").getAttribute("src");
+        if (x == "https://img.icons8.com/cotton/64/000000/hearts--v3.png") {
+            document.getElementById("collect").src = "https://img.icons8.com/cotton/64/000000/hearts--v2.png";
+            document.getElementById("collect").title = "unmark";
+        } else {
+            document.getElementById("collect").src = "https://img.icons8.com/cotton/64/000000/hearts--v3.png";
+        }
+        //alert(x);
+    }
+
+    function newMessage() {
+        var x = document.getElementById("contact").getAttribute("src");
+        if (x == "https://img.icons8.com/pastel-glyph/64/000000/filled-chat.png") {
+            document.getElementById("contact").src = "https://img.icons8.com/cotton/64/000000/filled-chat--v1.png";
+            document.getElementById("contact").title = "new message";
+        } else {
+            document.getElementById("contact").src = "https://img.icons8.com/pastel-glyph/64/000000/filled-chat.png";
+            document.getElementById("contact").title = "contact to company";
+        }
+    }
+</script>

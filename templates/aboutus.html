@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>About Us</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="container" style="font-weight: 500;">
+<div class="row" style="border-bottom: var(--color) 5px solid">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-8">
+                <br>
+                <a href="/">
+                    <img alt="Recruitment" src="https://ekrecruit.com.au/wp-content/uploads/2019/02/EK-Logo.png">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top: 1%;background-image:url('/static/img/aboutus.jpg');
+                         background-repeat:no-repeat;background-size:100% 100%;">
+    <div class="col-md-12" style="margin-top: 1%;">
+        <div class="jumbotron" style="background-color:rgba(255,255,255,0.6)">
+            <h2>
+                Thanks for your support!
+            </h2>
+
+            <p>
+                Our website is a privately owned the COMP9900 group, named From_HD_to FL, that was built 3 months ago.
+            </p>
+            <p>
+                Our consultants are business people with extensive experience in a variety of industry sectors as well
+                as
+                having
+                an average of ten years’ experience in the recruitment industry.
+            </p>
+            <p>
+                Even more importantly, knowing it’s not just the destination but the journey you experience to get
+                there, we’ve
+                developed a first-class customer experience program to ensure you are looked after every step of the
+                way.
+            </p>
+            <a id='postBt' class="btn btn-primary btn-large" href="">Join Us</a>
+        </div>
+    </div>
+</div>
+<script>
+    $('#postBt').click(function () {
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/send_email",
+            data: 123,
+            success: function (result) {
+            }
+        })
+    })
+</script>
+</body>
+</html>

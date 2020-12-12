@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Job Info</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<style>
+    dd {
+        word-break: break-all;
+    }
+</style>
+<body class="container">
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-8">
+                <br>
+                <a href="/loginhome">
+                    <img alt="Recruitment" src="https://ekrecruit.com.au/wp-content/uploads/2019/02/EK-Logo.png"/>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal"
+                        style="margin-top: 30%; margin-left: 50%;">
+                    Log in / Sign up
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color: var(--color);">
+                                <h5 class="modal-title" id="exampleModalLabel">
+                                    <font color="white">Log in / Sign up</font>
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true"><font color="white">&times;</font></span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <iframe src="/login" style="width: 100%; height: 480px;"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid div-top">
+    <div class="row row-top">
+        <div class="col-md-8" style="border-right: solid 1px #b4c2b2;">
+            <dl>
+                <dt>
+                    <h1>{{ info.real_name }}</h1>
+                </dt>
+                <dd>
+                    <h3>Expected Position:&nbsp;&nbsp;{{ info.jobname }} </h3>
+                    <font color="#696969"> <strong>Contact number:&nbsp;&nbsp;{{ info.phone_num }}</strong></font>
+                </dd>
+                <dd style="border-top: solid 1px #b4c2b2;">
+                    <br/>
+                    <h5>Personal Ability Description</h5>
+                    {{ info.desc }}
+                </dd>
+                <br/>
+
+
+                {% if(info.qual_need == "1") %}
+                    <dd style="border-top: solid 1px #b4c2b2;"><br/>
+                        <h5>Qualification</h5>
+                        <div class="row">
+                            <div class="col-md-5"><h6>The qualification type</h6></div>
+                            <div class="col-md-4">{{ info.qual_type }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5"><h6>Obtain date</h6></div>
+                            <div class="col-md-4"> {{ info.qual_date }}</div>
+                        </div>
+
+                        <h6>Brief description </h6>
+                        {{ info.qual_desc }}
+                    </dd>
+                {% endif %}
+
+                <br/>
+
+                {% if(info.exp_need == "1") %}
+                    <dd style="border-top: solid 1px #b4c2b2;"><br/>
+                        <h5>Experience</h5>
+                        <div class="row">
+                            <div class="col-md-5"><h6>The duration of experience</h6></div>
+                            <div class="col-md-4"> {{ info.exp_duration }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5"><h6>The experience type</h6></div>
+                            <div class="col-md-4">{{ info.exp_type }}</div>
+                        </div>
+                        <h6>Brief description</h6>
+                        {{ info.exp_desc }}
+                    </dd>
+                {% endif %}
+
+            </dl>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-6">
+                    {% if info.icon %}
+                    <img class="header" src="{{ info.icon }}" style="width: 160px;height: 160px;"/>
+                    {% else %}
+                    <img class="header" src="/static/img/client-face.png" style="width: 160px;height: 160px;"/>
+                    {% endif %}
+                </div>
+                <div class="col-md-6">
+                    <h6>
+                        Address:
+                    </h6>
+                    {{ info.location }}
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+
+<div class="row main_color" style="padding: 10px; margin-top:3%;">
+    <iframe src="/footer"></iframe>
+</div>
+<br/>
+</body>
+</html>

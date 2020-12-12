@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>offerstable</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <link href="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.js"></script>
+
+    <link href="https://cdn.bootcss.com/bootstrap-table/1.12.2/bootstrap-table.css" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdn.bootcss.com/bootstrap-table/1.12.2/extensions/reorder-rows/bootstrap-table-reorder-rows.css">
+
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.bootcss.com/bootstrap-table/1.12.2/extensions/filter-control/bootstrap-table-filter-control.css">
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.12.2/extensions/filter-control/bootstrap-table-filter-control.js"></script>
+
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<table id="offerstable">
+    <thead>
+    </thead>
+    <tbody>
+    {% for offer in offerinfos %}
+        <tr>
+            <td></td>
+            <td>{{ offer }}</td>
+            <td>{{ offerinfos[offer].pos_name }}</td>
+            <td><a href="/resumeinfo/{{ offer }}" target="_blank">{{ offerinfos[offer].real_name }}</a></td>
+            <td id="{{ offer }}">
+                {% if  offerinfos[offer].status == "3-1:accept" %}
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#sendoffer{{ offer }}Modal">
+                        Send offer
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="rejectoffer({{ offer }})">
+                        Reject offer
+                    </button>
+                    <div class="modal fade" id="sendoffer{{ offer }}Modal" tabindex="-1" role="dialog"
+                         aria-labelledby="sendoffer{{ offer }}Modal" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content" style="height: 800px; width: 170%; margin-left: -30%;">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="example{{ offer }}ModalLabel">Offer</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <iframe id='offer_content_{{ offer }}' src="/offer/{{ offer }}/templete" ></iframe>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                            id="close{{ offer }}">Close
+                                    </button>
+                                    <button type="button" class="btn btn-primary" onclick="change({{ offer }})"
+                                    id="new{{ offer }}">
+                                        Customize offer
+                                    </button>
+                                    <button type="button" class="btn btn-primary" id="send{{ offer }}">Send offer
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% elif offerinfos[offer].status == "3-2:refused" %}
+                    Reject invitation
+                {% elif offerinfos[offer].status == "4-1:offer" %}
+                    Offered
+                {% elif offerinfos[offer].status == "2-1:audition" %}
+                    Waiting
+                {% else %}
+                    Refused
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+<div id="toolbar" class="btn-group row" style="margin-right: 0px;margin-left: 0px;">
+    <span style="margin-left: 5px;"> Make some of the resume invisible temporarily</span>
+    <a href="/clearoffer/{{ job_position }}" type="button" class="btn btn-info btn-sm" style="margin-left: 5px;">
+        Invisible
+    </a>
+</div>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.12.2/bootstrap-table.js"></script>
+<script src="https://cdn.bootcss.com/TableDnD/1.0.3/jquery.tablednd.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.12.2/extensions/reorder-rows/bootstrap-table-reorder-rows.js"></script>
+<link rel="stylesheet" type="text/css"
+      href="https://cdn.bootcss.com/bootstrap-table/1.12.2/extensions/filter-control/bootstrap-table-filter-control.css">
+<script src="https://cdn.bootcss.com/bootstrap-table/1.12.2/extensions/filter-control/bootstrap-table-filter-control.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#offerstable").bootstrapTable({
+            striped: true,
+            search: true,
+            useRowAttrFunc: true,
+            toolbar: '#toolbar',
+            pagination: true,
+            columns:
+                [{
+                    field: 'No',
+                    title: 'No',
+                    formatter: function (value, row, index) {
+                        return index + 1;
+                    }
+                }, {
+                    field: 'Id',
+                    title: 'Id',
+                    visible: false,
+                }, {
+                    field: 'jobposition',
+                    title: 'Job Position',
+                }, {
+                    field: 'name',
+                    title: 'Name',
+                }, {
+                    field: 'status',
+                    title: 'Status/Action',
+                }],
+        });
+    });
+
+    function change(resume_id){
+        var button_id = $("#new"+resume_id).text();
+        if(button_id == 'Templete'){
+            $("#new"+resume_id).text("Customize offer");
+            $("#offer_content_"+resume_id).attr('src','/offer/'+resume_id+'/templete')
+        }
+        else{
+            $("#new"+resume_id).text("Templete");
+            $("#offer_content_"+resume_id).attr('src','/offer/'+resume_id+'/customize')
+
+        }
+
+    }
+
+    function rejectoffer(resume_id) {
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/rejectoffer/" + resume_id,
+            success: function (result) {
+                if (result.state == "success") {
+                    $("#" + resume_id).text("refused");
+                } else {
+                    window.alert("Fail, please try again");
+                }
+
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

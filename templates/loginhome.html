@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body class="container" >
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-8">
+                <br>
+                <a href="/">
+                    <img alt="Recruitment" src="https://ekrecruit.com.au/wp-content/uploads/2019/02/EK-Logo.png">
+                </a>
+            </div>
+            <div class="col-sm-2 ">
+                <img class="dropdown-toggle dropdown head_icon" id="dropdownMenuButton"
+                     src="/static/img/icon.jpg"
+                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="/account">
+                        <img src="https://img.icons8.com/cotton/64/000000/name--v2.png" style="width: 30px;">&nbspAccount</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/logout">
+                        <img src="https://img.icons8.com/cotton/64/000000/shutdown--v2.png" style="width: 30px;">&nbsp
+                        Log out</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+           aria-selected="true">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="seekers-tab" data-toggle="tab" href="#seekers" role="tab" aria-controls="seekers"
+           aria-selected="false">Job Seekers</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="employers-tab" data-toggle="tab" href="#employers" role="tab" aria-controls="employers"
+           aria-selected="false">Employers</a>
+    </li>
+</ul>
+
+<div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-interval="5000">
+                    <img src="https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4qkYq?ver=5c25&q=90&m=2&h=768&w=1024&b=%23FFFFFFFF&aim=true"
+                         class="d-block w-100" alt="recruitment" style="width: 100%; height: 500px;">
+                    <div class="carousel-caption">
+                        <h1>
+                            <font style="font-style:Italic; font-variant:small-caps; color: transparent; -webkit-text-fill-color: white; -webkit-text-stroke: 1px #000000;">
+                                Welcome to our website!</font>
+                        </h1>
+                        <p>
+                            &ndash;
+                        </p>
+                    </div>
+                    <div class="carousel-caption d-none d-md-block">
+
+                    </div>
+                </div>
+                <div class="carousel-item" data-interval="5000">
+                    <img src="https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RWptHL?ver=f9a8&q=90&m=2&h=768&w=1024&b=%23FFFFFFFF&aim=true"
+                         class="d-block w-100" alt="recruitment" style="width: 100%; height: 500px;">
+                    <div class="carousel-caption d-none d-md-block">
+
+                    </div>
+                </div>
+                <div class="carousel-item" data-interval="5000">
+                    <img src="https://almacareer.com/resources/public//blog/blog_pictures/Creative_working.png"
+                         class="d-block w-100"
+                         alt="recruitment" style="width: 100%; height: 500px;">
+                    <div class="carousel-caption d-none d-md-block">
+
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+        <form id="searchlist" role="form">
+            <div class="input-group mb-3 search_nav" style="margin-top: -67px; ">
+                <input type="text" id="job" name="job" placeholder="Keywords search" class="margin_10">
+                <select class="custom-select margin_10" name="types">
+                    <option selected>- All employment types -</option>
+                    <option value="Full-time job">Full-time job</option>
+                    <option value="Part-time job">Part-time job</option>
+                    <option value="Internship">Internship</option>
+                </select>
+                <input class="margin_10" type="text" name="min_salary" oninput="value=value.replace(/[^\d]/g,'')"
+                       placeholder="minimum salary">
+                <input class="margin_10" type="text" name="max_salary" oninput="value=value.replace(/[^\d]/g,'')"
+                       placeholder="maximum salary">
+                <select class="custom-select margin_10" name="salary_types">
+                    <option selected>- Salary types -</option>
+                    <option value="1/24">per hour</option>
+                    <option value="1">per day</option>
+                    <option value="7">per week</option>
+                    <option value="30">per month</option>
+                    <option value="365">per year</option>
+                </select>
+                <button class="btn btn-outline-primary margin_10" type="button" id="submit">
+                    <font color="white">Search Jobs</font></button>
+            </div>
+        </form>
+
+        <div class="row main_title" style="margin: 0px;">
+            <font class="title_word">Industries</font>
+            <iframe src="/carousel" style="width: 100%; height: 350px;"></iframe>
+        </div>
+    </div>
+
+    <div class="tab-pane fade" id="seekers" role="tabpanel" aria-labelledby="job seekers-tab">
+        <form id="searchmore" role="form">
+            <div class="input-group mb-3 search_nav" style="z-index: 0;">
+                <table align="center" width="100%">
+                    <tr>
+                        <td>
+                            <div class="input-group mb-3">
+                                <input type="text" id="job" name="job" placeholder="Keywords search"
+                                       style="margin-left: 10px; margin-top: 10px">
+                                <select class="custom-select margin_10" name="types">
+                                    <option selected>- All employment types -</option>
+                                    <option value="Full-time job">Full-time job</option>
+                                    <option value="Part-time job">Part-time job</option>
+                                    <option value="Internship">Internship</option>
+                                </select>
+                                <input style="margin-top: 10px" type="text" name="min_salary"
+                                       oninput="value=value.replace(/[^\d]/g,'')" placeholder="minimum salary">
+                                <input style="margin-left: 10px; margin-top: 10px" type="text" name="max_salary"
+                                       oninput="value=value.replace(/[^\d]/g,'')" placeholder="maximum salary">
+                                <select class="custom-select margin_10" name="salary_types">
+                                    <option selected>- Salary types -</option>
+                                    <option value="1/24">per hour</option>
+                                    <option value="1">per day</option>
+                                    <option value="7">per week</option>
+                                    <option value="30">per month</option>
+                                    <option value="365">per year</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td align="center">
+                            <button class="btn btn-outline-primary" type="button" id="submitmore">Search Jobs
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td align="center">
+                            <div title="You need to be patient if you use the intelligent search.">
+                                <input class="form-check-input" style="width: 18px; height: 18px" type="checkbox" name="if_ai" value="1">
+                                <font size="4" color="#1e90ff">IntelliSearch</font>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="collapse multi-collapse" id="more">
+                                <div class="input-group mb-3">
+                                    <select class="custom-select margin_10" name="sorted_parameter" id="sorted_parameter">
+                                        <option value="default" selected>- Sorted by -</option>
+                                        <option value="salary">Salary</option>
+                                        <option value="time">Closing date</option>
+                                        <option value="hot">Hot jobs</option>
+                                    </select>
+                                    <select class="custom-select margin_10" name="sorted_direction" id="sorted_direction">
+                                        <option value="0" selected>From low to high</option>
+                                        <option value="1">From high to low</option>
+                                    </select>
+                                    <select class="custom-select margin_10" name="work_experience">
+                                        <option selected>- Experience duration -</option>
+                                        <option value="Less than one year">Less than one year</option>
+                                        <option value="One year">One year</option>
+                                        <option value="Two years">Two years</option>
+                                        <option value="Three years">Three years</option>
+                                        <option value="More than three years">More than three years</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td align="center">
+                            <a data-toggle="collapse" href="#more" role="button" aria-controls="more">◁ More</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+
+        <div class="row main_title" id="result">
+        </div>
+        <br/>
+
+        <div class="row main_title">
+            <font class="title_word">The most popular postions</font>
+            <iframe src="/joblist/hot" style="width: 100%; height: 500px;"></iframe>
+
+        </div>
+        <br/>
+
+        <div class="row main_title">
+            <font class="title_word">The positions in
+                need of hiring</font>
+            <iframe src="/joblist/need" style="width: 100%; height: 500px;"></iframe>
+
+        </div>
+    </div>
+
+    <div class="tab-pane fade" id="employers" role="tabpanel" aria-labelledby="employers-tab">
+        <form id="searchrequest" role="form">
+            <div class="input-group mb-3 search_nav" style="z-index: 0;">
+                <input type="text" id="job" name="position_keyword" placeholder="Position Keywords" class="margin_10">
+                <input type="text" id="job" name="qualification_keyword" placeholder="Qualification Keywords"
+                       class="margin_10">
+                <select name="exp_type" class="custom-select margin_10">
+                    <option selected>- Experience type -</option>
+                    <option>Working experience</option>
+                    <option>Internship</option>
+                </select>
+                <select name="exp_dura" class="custom-select margin_10">
+                    <option selected>- Experience durations -</option>
+                    <option>Less than one year</option>
+                    <option>One year</option>
+                    <option>Two years</option>
+                    <option>Three years</option>
+                    <option>More than three years</option>
+                </select>
+                <select class="custom-select margin_10" name="qual_need">
+                    <option selected>- Qualification Need -</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+                <button class="btn btn-outline-primary margin_10" type="button" id="submitrequest">
+                    Search</button>
+            </div>
+        </form>
+        <div class="row main_title" id="request_result">
+        </div>
+
+        <div class="row main_title">
+            <font class="title_word">Job request</font>
+            <iframe src="/jobrequest" style="width: 100%; height: 500px;" ></iframe>
+
+        </div>
+    </div>
+</div>
+<br/>
+
+
+<div class="row main_color" style=" margin: 0px; padding: 10px;">
+    <iframe src="/footer"></iframe>
+</div>
+<br>
+
+<script src="/static/js/home.js"></script>
+<script src="/static/js/geticon.js"></script>
+</body>
+</html>

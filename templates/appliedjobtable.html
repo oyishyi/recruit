@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>appliedjob</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <link href="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.js"></script>
+
+    <link href="https://cdn.bootcss.com/bootstrap-table/1.12.2/bootstrap-table.css" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdn.bootcss.com/bootstrap-table/1.12.2/extensions/reorder-rows/bootstrap-table-reorder-rows.css">
+
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.bootcss.com/bootstrap-table/1.12.2/extensions/filter-control/bootstrap-table-filter-control.css">
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.12.2/extensions/filter-control/bootstrap-table-filter-control.js"></script>
+
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<style>
+    .del {
+        content: url('https://img.icons8.com/ios/50/000000/cancel.png');
+        width: 26px;
+        height: 26px;
+    }
+
+    .del:hover {
+        content: url('https://img.icons8.com/ios-filled/50/000000/cancel.png');
+    }
+
+    .look {
+        content: url('https://img.icons8.com/ios/50/000000/view-file.png');
+        width: 26px;
+        height: 26px;
+    }
+
+    .look:hover {
+        content: url('https://img.icons8.com/ios-filled/50/000000/view-file.png');
+    }
+
+    .accept {
+        content: url('https://img.icons8.com/ios/50/000000/checked.png');
+        width: 26px;
+        height: 26px;
+    }
+
+    .accept:hover {
+        content: url('https://img.icons8.com/ios-filled/50/000000/checked.png');
+    }
+
+</style>
+<body>
+<table >
+    <thead>
+    </thead>
+    <tbody>
+    {% for job in appliedinfos %}
+        <tr>
+            <td></td>
+            <td>{{ job }}</td>
+            <td><a href="/jobInfo/{{ appliedinfos[job].pos_id }}" target="_blank">{{ appliedinfos[job].pos_name }}</a></td>
+            <td>{{ appliedinfos[job].company_name }}</td>
+            <td><a href="/resumeinfo/{{ job }}" target="_blank">
+                <img class="look"/></a></td>
+            <td id="{{ job }}">
+            {% if  appliedinfos[job].status == "1:submitted" %}
+                Waiting for invitation
+                {% elif  appliedinfos[job].status == "2-1:audition" %}
+                    Invitation
+                    <img class="accept" onclick="accept_reject({{ job }},'accept')"/>
+                    <img class="del" onclick="accept_reject({{ job }}, 'refuse')"/>
+                {% elif  appliedinfos[job].status == "2-2:refused" %}
+                Resume failed
+                {% elif  appliedinfos[job].status == "3-1:accept" %}
+                Accept invitation
+                {% elif  appliedinfos[job].status == "3-2:refused" %}
+                Refused invitation
+                {% elif  appliedinfos[job].status == "4-1:offer" %}
+                <a href="/viewoffer/{{ job }}" target="_blank">View offer</a>
+                {% else %}
+                    Offer refused
+                {% endif %}
+
+            </td>
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+</div>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.12.2/bootstrap-table.js"></script>
+<script src="https://cdn.bootcss.com/TableDnD/1.0.3/jquery.tablednd.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.12.2/extensions/reorder-rows/bootstrap-table-reorder-rows.js"></script>
+<link rel="stylesheet" type="text/css"
+      href="https://cdn.bootcss.com/bootstrap-table/1.12.2/extensions/filter-control/bootstrap-table-filter-control.css">
+<script src="https://cdn.bootcss.com/bootstrap-table/1.12.2/extensions/filter-control/bootstrap-table-filter-control.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("table").bootstrapTable({
+            striped: true,
+            search: true,
+            useRowAttrFunc: true,
+            {#filterControl: true,#}
+            pagination: true,
+            columns:
+                [{
+                    field: 'No',
+                    title: 'No',
+                    formatter: function (value, row, index) {
+                        return index + 1;
+                    }
+                }, {
+                    field: 'Id',
+                    title: 'Id',
+                    visible: false,
+                }, {
+                    field: 'jobposition',
+                    title: 'Job Position',
+                    {#filterControl: "select",#}
+                }, {
+                    field: 'company_name',
+                    title: 'Company Name',
+
+                }, {
+                    field: 'resume',
+                    title: 'Resume',
+
+                }, {
+                    field: 'status',
+                    title: 'Status/Action',
+
+                }],
+        });
+    });
+
+    function accept_reject(resume_id, action){
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/accept_reject/" + resume_id+"/"+action,
+            success: function (result) {
+                if (result.state == "success") {
+                    if(action == "accept"){
+                        $("#"+resume_id).text("Accept invitation");
+                    }else{
+                        $("#"+resume_id).text("Refused invitation");
+                    }
+
+                } else {
+                    window.alert("Fail, please try again");
+                }
+            }
+        });
+    }
+
+</script>
+
+</body>
+</html>

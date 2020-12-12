@@ -1,0 +1,265 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Resume</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/js/fileinput.min.js"></script>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/css/fileinput-rtl.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/css/fileinput.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body style="background-color: white">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <form role="form" id="formRe">
+                <div class="form-group">
+                    <label>
+                        <h4>
+                            Phone Number
+                        </h4>
+                    </label>
+                    <br/>
+                    <input name='phone_num' id='phone_num' maxlength="11" placeholder="only 11 numbers"
+                           oninput="value=value.replace(/[^\d]/g,'')" />
+                    <span id="hint1"></span>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        <h4>
+                            Experience
+                        </h4>
+                    </label>
+                    <h6>
+                        Do you have any work experience with this position?
+                    </h6>
+
+                    <div class="btn-group" id="needradio">
+                        <input type='radio' name='experience' id='need1' value="1"/>Yes
+                        <input type='radio' name='experience' id='need1' checked value="0"/>No
+                    </div>
+
+                    <div id="log">
+                        <br/>
+                        <h6>
+                            How long is your work experience period?
+                        </h6>
+                        <label>
+                            Starting date
+                        </label>
+                        <input id="start_date" type="date" name="start_date"/>
+                        <br/>
+                        <label>
+                            Ending date
+                        </label>
+                        <input id="end_date" type="date" name="end_date"/>
+                        <br/><br/>
+
+                        <h6>
+                            What is your experience type(Are you a student)?
+                        </h6>
+                        <select name="exp_type">
+                            <option selected>- Experience type -</option>
+                            <option>Working experience</option>
+                            <option>Internship</option>
+                        </select>
+                        <br/><br/>
+
+                        <h6>
+                            Please briefly describe your work experience.
+                        </h6>
+                        <textarea rows="10" cols="50" placeholder="No more than 500 characters."
+                                  name="exp_desc" maxlength="500"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        <h4>
+                            Qualification
+                        </h4>
+                    </label>
+                    <h6>
+                        Do you have any certification or award with this position?
+                    </h6>
+                    <div class="btn-group" id="needradio2">
+                        <input type='radio' name='qualification' id='need2' value="1"/>Yes
+                        <input type='radio' name='qualification' id='need2' checked value="0"/>No
+                    </div>
+
+                    <div id="log2">
+                        <br/>
+                        <h6>
+                            What time your obtained this certification or award?
+                        </h6>
+                        <label>
+                            Date of Certification
+                        </label>
+                        <input id="qual_date" type="date" name="qual_date"/>
+                        <br/><br/>
+
+                        <h6>
+                            What is your qualification type(Certification or Award)?
+                        </h6>
+                        <select id="qual_type" name="qual_type">
+                            <option selected>- Qualification type -</option>
+                            <option>Certification</option>
+                            <option>Award</option>
+                        </select>
+                        <br/><br/>
+
+                        <h6>
+                            Please briefly describe how you obtained this certification or award.
+                        </h6>
+                        <textarea rows="10" cols="50" placeholder="No more than 500 characters."
+                                  id="qual_desc" name="qual_desc" maxlength="500"></textarea>
+                        <br/><br/>
+
+                        <div class="form-group">
+                            <label class="control-label">
+                                <h6>Please upload relevant supporting evidence.
+                                </h6></label>
+                            <div class="file-loading">
+                                <input id="attachment" name="attachment" type="file" accept="application/pdf">
+                            </div>
+                            <div id="kartik-file-errors"></div>
+                            <p class="help-block">
+                                Please confirm the authenticity of attachments...
+                            </p>
+                            <input type="checkbox" name="checkbox"/>
+                            Yes, I sure.
+                            <p id="hint2"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        <h5>
+                            Expected Salary
+                        </h5>
+                    </label><br/>
+                    <select name="expected_salary">
+                        <option selected>- Renumeration range(dollars per month)-</option>
+                        <option>Less than 1000</option>
+                        <option>1000 ~ 2000</option>
+                        <option>2000 ~ 3000</option>
+                        <option>3000 ~ 4000</option>
+                        <option>4000 ~ 5000</option>
+                        <option>More than 5000</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        <h5>
+                            Technical Skills
+                        </h5>
+                    </label><br/>
+                    <p>
+                        Please briefly describe what professional skils you have.
+                    </p>
+                    <textarea rows="10" cols="50" name="skill"
+                              placeholder="No more than 500 characters." maxlength="500"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        <h5>
+                            Postscript
+                        </h5>
+                    </label><br/>
+                    <p>
+                        Please fill in the postscript if you want us to know more about you.
+                    </p>
+                    <textarea rows="10" cols="50" placeholder="No more than 500 characters."
+                              name="ps" maxlength="500"></textarea>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/JavaScript">
+
+    $("#attachment").fileinput({
+        showPreview: false,
+        showUpload: false,
+        elErrorContainer: '#kartik-file-errors',
+        allowedFileExtensions: ["pdf"],
+        maxFileSize: 5000,
+    });
+
+
+    $(document).ready(function () {
+
+        $("#log").hide();
+        $("#log2").hide();
+        $("#needradio :radio").change(function () {
+            var value = $(this).val();
+            if (value == 0) {
+                $("#log").hide();
+            } else {
+                $("#log").show();
+            }
+        });
+
+        $("#needradio2 :radio").change(function () {
+            var value = $(this).val();
+            if (value == 0) {
+                $("#log2").hide();
+            } else {
+                $("#log2").show();
+            }
+        });
+    });
+
+
+
+    $('#subresume', parent.document).click(function () {
+        if($('#phone_num').val().length == 0){
+            $('#hint1').html('<font color="red">Invalid phone number </font>');
+                $('html, body').animate({scrollTop: 0}, 500);
+                return false;
+        }
+
+        if ($('input:radio[name="qualification"]:checked').val() == '1') {
+            if ($('input[name="checkbox"]').is(':checked')==false) {
+                $('#hint2').html('<font color="red">Need to be checked.</font>');
+                $('html, body').animate({scrollTop: $("#attachment").offset().top}, 500);
+                return false;
+            }
+        }
+
+        var data = new FormData($("#formRe")[0]);
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/resume/{{ pos_id }}",
+            {#data:$('#formRe').serialize(),#}
+            processData: false,
+            contentType: false,
+            data: data,
+            success: function (result) {
+                if (result.state == "success") {
+                    window.alert("Submit Successfully");
+                    document.getElementById("formRe").reset();
+                    location.reload();
+                    $('#closeresume', parent.document).click();
+                } else {
+                    window.alert("Fail to submit, no duplicate submission");
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
