@@ -15,8 +15,8 @@ CMD输入python app.py  打开，再在浏览器中输入localhost:5000
 	>python3 -m spacy download en_core_web_md    
 ## Pymysql driver    
 	>pip3 install pymysql   
-## Sqlalchemy upgrade   
-	>pip3 install --upgrade sqlalchemy --ignore-installed    
+## Sqlalchemy   
+	>pip3 install sqlalchemy
 ## cryptography    
 	>pip install cryptography  
 
