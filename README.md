@@ -1,6 +1,8 @@
 # recruit
 一个包含基本功能的求职网站  
 
+语言python3
+
 CMD输入python app.py  打开，再在浏览器中输入localhost:5000
 
 使用的数据库是AWS的，打开服务端需要翻墙（  
