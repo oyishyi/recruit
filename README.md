@@ -7,10 +7,10 @@ CMD输入python app.py  打开，再在浏览器中输入localhost:5000
 
 引用了以下库，需要安装。
 
-Geopy 
-	pip3 install geopy 
-Spacy 
-	pip3 install spacy 
+Geopy   
+	pip3 install geopy   
+Spacy   
+	pip3 install spacy   
 Spacy model ‘en_core_web_md’ 
 	python3 -m spacy download en_core_web_md  
 Pymysql driver, the CSE lab may or may not install 'pymysql', which is the driver to connect mysql.  
