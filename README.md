@@ -11,12 +11,12 @@ Geopy
 	pip3 install geopy   
 Spacy   
 	pip3 install spacy   
-Spacy model ‘en_core_web_md’ 
-	python3 -m spacy download en_core_web_md  
-Pymysql driver, the CSE lab may or may not install 'pymysql', which is the driver to connect mysql.  
-	pip3 install pymysql 
-Sqlalchemy upgrade 
-	pip3 install --upgrade sqlalchemy --ignore-installed  
-cryptography  
+Spacy model ‘en_core_web_md’   
+	python3 -m spacy download en_core_web_md    
+Pymysql driver, the CSE lab may or may not install 'pymysql', which is the driver to connect mysql.    
+	pip3 install pymysql   
+Sqlalchemy upgrade   
+	pip3 install --upgrade sqlalchemy --ignore-installed    
+cryptography    
 	pip install cryptography  
 
