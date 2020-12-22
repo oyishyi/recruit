@@ -15,16 +15,20 @@ CMD输入python app.py  打开，再在浏览器中输入localhost:5000
 
 引用了以下库，需要安装。
 
+## flask
+	>pip3 install flask
+## flask-sqlalchemy
+	>pip3 flask-sqlalchemy
+## Pymysql driver    
+	>pip3 install pymysql   
+## Sqlalchemy   
+	>pip3 install sqlalchemy
 ## Geopy   
 	>pip3 install geopy   
 ## Spacy   
 	>pip3 install spacy   
 ## Spacy model ‘en_core_web_md’   
 	>python3 -m spacy download en_core_web_md    
-## Pymysql driver    
-	>pip3 install pymysql   
-## Sqlalchemy   
-	>pip3 install sqlalchemy
 ## cryptography    
-	>pip install cryptography  
+	>pip3 install cryptography  
 
