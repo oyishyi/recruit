@@ -7,7 +7,7 @@
 
 打开后请参考用户手册使用（英文）
 
-语言python3
+语言python3， 框架flask
 
 CMD输入python app.py  打开，再在浏览器中输入localhost:5000
 
